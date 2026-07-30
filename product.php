@@ -164,6 +164,32 @@ if (session_status() == PHP_SESSION_NONE) {
         }
         $relStmt->close();
 
+        // ---------- 7. Reviews for this product ----------
+        $reviews = [];
+        $revStmt = $conn->prepare("
+    SELECT customer_name, rating, review, created_at
+    FROM product_reviews
+    WHERE product_id = ?
+    ORDER BY created_at DESC
+");
+        $revStmt->bind_param('i', $productId);
+        $revStmt->execute();
+        $revResult = $revStmt->get_result();
+        while ($row = $revResult->fetch_assoc()) {
+            $reviews[] = $row;
+        }
+        $revStmt->close();
+
+        // average rating (for the star display near the product title)
+        $avgRating = 0;
+        if (!empty($reviews)) {
+            $sum = 0;
+            foreach ($reviews as $r) {
+                $sum += (int) $r['rating'];
+            }
+            $avgRating = round($sum / count($reviews));
+        }
+
         // helper: escape output safely
         function e($value)
         {
@@ -200,7 +226,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                 </ul>
                             </div> <!-- End of .sidebar_categories -->
 
-                            
+
 
                             <div class="best_sellers clear_fix wow fadeInUp">
                                 <div class="theme_inner_title">
@@ -283,7 +309,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <div class="product-review-tab">
                                 <ul class="nav nav-pills">
                                     <li><a data-toggle="pill" href="#tab1">Description</a></li>
-                                    <li class="active"><a data-toggle="pill" href="#tab2">Reviews</a></li>
+                                    <li class="active"><a data-toggle="pill" href="#tab2">Reviews(<?php echo count($reviews); ?>)</a></li>
                                 </ul>
 
                                 <div class="tab-content">
@@ -292,13 +318,33 @@ if (session_status() == PHP_SESSION_NONE) {
                                     </div> <!-- End of #tab1 -->
 
                                     <div id="tab2" class="tab-pane fade in active">
-                                        <!--
-                                    NOTE: there's no `reviews` table in the schema you shared,
-                                    so this section can't be made dynamic yet. Add a `reviews`
-                                    table (id, product_id, name, email, rating, comment, created_at)
-                                    and I can wire this up the same way as the rest of the page.
-                                -->
-                                        <p>No reviews yet. Be the first to review this product.</p>
+
+                                        <?php if (empty($reviews)): ?>
+                                            <p>No reviews yet. Be the first to review this product.</p>
+                                        <?php else: ?>
+                                            <?php foreach ($reviews as $rev): ?>
+                                                <!-- Single Review -->
+                                                <div class="item_review_content clear_fix">
+                                                    <div class="text float_left">
+                                                        <div class="sec_up clear_fix">
+                                                            <h6 class="float_left"><?php echo e($rev['customer_name'] ?: 'Anonymous'); ?></h6>
+                                                            <div class="float_right">
+                                                                <span class="p_color"><?php echo e(date('d/m/Y \a\t H.i', strtotime($rev['created_at']))); ?></span>
+                                                                <ul>
+                                                                    <?php
+                                                                    $rating = (int) $rev['rating'];
+                                                                    for ($s = 1; $s <= 5; $s++):
+                                                                    ?>
+                                                                        <li><i class="fa <?php echo $s <= $rating ? 'fa-star' : 'fa-star-o'; ?>" aria-hidden="true"></i></li>
+                                                                    <?php endfor; ?>
+                                                                </ul>
+                                                            </div>
+                                                        </div> <!-- End of .sec_up -->
+                                                        <p><?php echo nl2br(e($rev['review'])); ?></p>
+                                                    </div> <!-- End of .text -->
+                                                </div> <!-- End of .item_review_content -->
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
 
                                         <div class="add_your_review">
                                             <div class="theme_inner_title">
@@ -309,13 +355,20 @@ if (session_status() == PHP_SESSION_NONE) {
                                                 <input type="hidden" name="product_id" value="<?php echo (int) $product['id']; ?>">
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" name="name" placeholder="Name*" required>
+                                                        <input type="text" name="customer_name" placeholder="Name*" required>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="email" name="email" placeholder="Email*" required>
+                                                        <select name="rating" required>
+                                                            <option value="">Rating*</option>
+                                                            <option value="5">5 - Excellent</option>
+                                                            <option value="4">4 - Good</option>
+                                                            <option value="3">3 - Average</option>
+                                                            <option value="2">2 - Fair</option>
+                                                            <option value="1">1 - Poor</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <textarea name="comment" placeholder="Your Review..." required></textarea>
+                                                        <textarea name="review" placeholder="Your Review..." required></textarea>
                                                     </div>
                                                 </div>
                                                 <button class="color1_bg tran3s" type="submit">Add A Review</button>

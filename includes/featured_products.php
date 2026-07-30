@@ -126,7 +126,7 @@ ORDER BY products.id DESC
                                     <div class="top-content">
                                         <ul>
                                             <li>
-                                                <a href="#"><span class="fa fa-eye"></span></a>
+                                                <a href="product.php?id=<?php echo $product['id']; ?>"><span class="fa fa-eye"></span></a>
                                             </li>
 
                                             <li class="tultip-op">
