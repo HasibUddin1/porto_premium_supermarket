@@ -1,0 +1,46 @@
+<svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .word-main { font-family: 'Poppins'; font-weight: 700; }
+      .word-sub  { font-family: 'Poppins'; font-weight: 500; }
+    </style>
+  </defs>
+
+  <!-- ===== ICON: circular emblem with basket + leaf ===== -->
+  <g transform="translate(18,18)">
+    <!-- outer ring -->
+    <circle cx="62" cy="62" r="58" fill="#FFFFFF" stroke="#5C3A21" stroke-width="5"/>
+    <!-- inner thin accent ring -->
+    <circle cx="62" cy="62" r="49" fill="none" stroke="#8DC63F" stroke-width="1.5" opacity="0.55"/>
+
+    <!-- basket handle -->
+    <path d="M40 58 C40 40, 84 40, 84 58"
+          fill="none" stroke="#5C3A21" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- basket body -->
+    <path d="M32 58 L92 58 L84 96 C83 100, 79 103, 74 103 L50 103 C45 103, 41 100, 40 96 Z"
+          fill="#F4EDE4" stroke="#5C3A21" stroke-width="5" stroke-linejoin="round"/>
+
+    <!-- basket weave lines -->
+    <g stroke="#5C3A21" stroke-width="2.4" opacity="0.75" stroke-linecap="round">
+      <line x1="49" y1="63" x2="53" y2="98"/>
+      <line x1="62" y1="63" x2="62" y2="99"/>
+      <line x1="75" y1="63" x2="71" y2="98"/>
+      <line x1="37" y1="72" x2="87" y2="72"/>
+      <line x1="35.5" y1="84" x2="88.5" y2="84"/>
+    </g>
+
+    <!-- leaf sprig on handle -->
+    <path d="M62 38 C56 28, 44 26, 38 30 C43 36, 50 40, 62 38 Z" fill="#8DC63F"/>
+    <path d="M62 38 C68 28, 80 26, 86 30 C81 36, 74 40, 62 38 Z" fill="#6FA82E"/>
+    <path d="M62 38 L62 30" stroke="#5A8A0F" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== WORDMARK ===== -->
+  <g transform="translate(158,0)">
+    <text x="0" y="80" class="word-main" font-size="46" letter-spacing="0.5" fill="#5C3A21">Porto</text>
+    <text x="0" y="112" class="word-sub" font-size="20" letter-spacing="3.5" fill="#6FA82E">PREMIUM SUPERMARKET</text>
+    <!-- accent underline -->
+    <rect x="2" y="122" width="230" height="3" rx="1.5" fill="#8DC63F"/>
+  </g>
+</svg>
