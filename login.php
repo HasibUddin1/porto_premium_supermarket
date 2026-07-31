@@ -122,7 +122,7 @@ unset(
                             <div class="form_group">
                                 <label>Email</label>
                                 <div class="input_group">
-                                    <input type="email" name="email" placeholder="youremail@gmail.com" required>
+                                    <input type="email" name="email" placeholder="youremail@gmail.com">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div> <!-- End of .input_group -->
                             </div> <!-- End of .form_group -->
@@ -130,7 +130,7 @@ unset(
                             <div class="form_group">
                                 <label>Password</label>
                                 <div class="input_group">
-                                    <input type="password" name="password" placeholder="********" required>
+                                    <input type="password" name="password" placeholder="********">
                                     <i class="fa fa-lock" aria-hidden="true"></i>
                                 </div> <!-- End of .input_group -->
                             </div> <!-- End of .form_group -->
@@ -156,7 +156,7 @@ unset(
                                     <div class="form_group">
                                         <label>Name</label>
                                         <div class="input_group">
-                                            <input type="text" name="name" value="<?php echo e($registerOld['name'] ?? ''); ?>" required>
+                                            <input type="text" name="name" value="<?php echo e($registerOld['name'] ?? ''); ?>">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                         </div> <!-- End of .input_group -->
                                     </div> <!-- End of .form_group -->
@@ -164,7 +164,7 @@ unset(
                                     <div class="form_group">
                                         <label>Password</label>
                                         <div class="input_group">
-                                            <input type="password" name="password" required>
+                                            <input type="password" name="password">
                                             <i class="fa fa-lock" aria-hidden="true"></i>
                                         </div> <!-- End of .input_group -->
                                     </div> <!-- End of .form_group -->
@@ -172,7 +172,7 @@ unset(
                                     <div class="form_group">
                                         <label>Phone Number</label>
                                         <div class="input_group">
-                                            <input type="text" name="phone" value="<?php echo e($registerOld['phone'] ?? ''); ?>" required>
+                                            <input type="text" name="phone" value="<?php echo e($registerOld['phone'] ?? ''); ?>">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </div> <!-- End of .input_group -->
                                     </div> <!-- End of .form_group -->
@@ -182,7 +182,7 @@ unset(
                                     <div class="form_group">
                                         <label>Email Address</label>
                                         <div class="input_group">
-                                            <input type="email" name="email" value="<?php echo e($registerOld['email'] ?? ''); ?>" required>
+                                            <input type="email" name="email" value="<?php echo e($registerOld['email'] ?? ''); ?>">
                                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         </div> <!-- End of .input_group -->
                                     </div> <!-- End of .form_group -->
@@ -190,7 +190,7 @@ unset(
                                     <div class="form_group">
                                         <label>Confirm Password</label>
                                         <div class="input_group">
-                                            <input type="password" name="confirm_password" required>
+                                            <input type="password" name="confirm_password">
                                             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                         </div> <!-- End of .input_group -->
                                     </div> <!-- End of .form_group -->
@@ -207,7 +207,7 @@ unset(
 
                             <div class="clear_fix">
                                 <div class="single_checkbox float_left">
-                                    <input type="checkbox" id="terms" name="terms" required>
+                                    <input type="checkbox" id="terms" name="terms">
                                     <label for="terms">I agree the term’s & conditions</label>
                                 </div> <!-- End .single_checkbox -->
                             </div>

@@ -5571,7 +5571,7 @@ footer .bottom_footer h6 {
   top: 0;
 }
 .account_page .single_checkbox input[type="checkbox"]:checked + label:before {
-  content: "ÃƒÆ’Ã‚Â¯ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬â„¢";
+  content: "\f00c";
   font-family: "font-awesome";
   font-size: 14px;
   line-height: 18px;
