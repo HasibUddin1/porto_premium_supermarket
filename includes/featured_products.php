@@ -129,7 +129,7 @@ ORDER BY products.id DESC
                                                 <a href="product.php?id=<?php echo $product['id']; ?>"><span class="fa fa-eye"></span></a>
                                             </li>
 
-                                            <li class="tultip-op">
+                                            <li class="tultip-op" data-product-id="<?php echo (int) $product['id']; ?>">
                                                 <span class="tultip">
                                                     <i class="fa fa-sort-desc"></i>
                                                     ADD TO CART

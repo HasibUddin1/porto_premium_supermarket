@@ -85,6 +85,7 @@ unset(
         </section>
 
 
+        <!-- TODO: Adding user image while registering the user -->
         <!-- Login Page Content*********************** -->
         <div class="account_page">
             <div class="container">

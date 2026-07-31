@@ -281,7 +281,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <?php for ($s = 0; $s < 5; $s++): ?>
                                             <li><i class="fa fa-star" aria-hidden="true"></i></li>
                                         <?php endfor; ?>
-                                        <li>(<?php echo isset($reviewCount) ? (int) $reviewCount : 0; ?> Customers Review)</li>
+                                        <li>(<?php echo count($reviews) ? (int) count($reviews) : 0; ?> Customers Review)</li>
                                     </ul>
                                     <span class="item_price">$ <?php echo e(number_format((float) $product['price'], 2)); ?></span>
                                     <p><?php echo nl2br(e($product['description'])); ?></p>
@@ -297,7 +297,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                         <span class="float_left color1">*Expected Delivery in 4-10 Days</span>
                                     </div>
 
-                                    <form action="cart_add.php" method="post">
+                                    <form action="core/cart_add.php" method="post">
                                         <input type="hidden" name="product_id" value="<?php echo (int) $product['id']; ?>">
                                         <input class="product_quantity" type="number" name="quantity" value="1" min="1">
                                         <button type="submit" class="d-inline tran3s color1_bg add_to_cart_btn">Add to Cart</button>

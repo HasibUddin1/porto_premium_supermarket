@@ -43,6 +43,37 @@ $_SESSION['user_name']  = $user['name'];
 $_SESSION['user_email'] = $user['email'];
 $_SESSION['user_role']  = $user['role']; // 'user' or 'admin'
 
+// ---------- Merge guest-session cart into the DB cart ----------
+if (!empty($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $prodId => $qty) {
+        $prodId = (int) $prodId;
+        $qty    = (int) $qty;
+        if ($prodId <= 0 || $qty < 1) {
+            continue;
+        }
+
+        $existStmt = $conn->prepare("SELECT id, quantity FROM cart_items WHERE user_id = ? AND product_id = ? LIMIT 1");
+        $existStmt->bind_param('ii', $user['id'], $prodId);
+        $existStmt->execute();
+        $existingItem = $existStmt->get_result()->fetch_assoc();
+        $existStmt->close();
+
+        if ($existingItem) {
+            $newQty = $existingItem['quantity'] + $qty;
+            $updateStmt = $conn->prepare("UPDATE cart_items SET quantity = ? WHERE id = ?");
+            $updateStmt->bind_param('ii', $newQty, $existingItem['id']);
+            $updateStmt->execute();
+            $updateStmt->close();
+        } else {
+            $insertStmt = $conn->prepare("INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?, ?, ?)");
+            $insertStmt->bind_param('iii', $user['id'], $prodId, $qty);
+            $insertStmt->execute();
+            $insertStmt->close();
+        }
+    }
+    unset($_SESSION['cart']);
+}
+
 if ($remember) {
     // 30-day cookie carrying the user id — fine for a demo, but for
     // production this should be a random, DB-stored remember-me token,

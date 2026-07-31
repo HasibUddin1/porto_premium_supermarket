@@ -66,77 +66,61 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                                     </div>
                                 </form>
                             </div>
-                        </div> <!-- End of .cart_list -->
+                        </div>
                     </div>
+
+
+                    <!-- Cart Items -->
+
+                    <?php
+                    require_once __DIR__ . '/../core/db_connection.php'; // exposes $conn
+                    require_once __DIR__ . '/../core/cart_helper.php';
+
+                    $cart = get_cart_summary($conn);
+                    ?>
+
                     <div class="cart_option float_left">
-                        <button class="cart tran3s dropdown-toggle" id="cartDropdown"><i class="fa icon-icon-32846" aria-hidden="true"></i><span class="s_color_bg p_color">2</span></button>
+                        <button class="cart tran3s dropdown-toggle" id="cartDropdown">
+                            <i class="fa icon-icon-32846" aria-hidden="true"></i>
+                            <span class="s_color_bg p_color cart_count"><?php echo (int) $cart['count']; ?></span>
+                        </button>
                         <div class="cart-info">
                             <div>My Cart</div>
-                            <div class="doller">84.00$</div>
+                            <div class="doller cart_total_amount">$<?php echo number_format($cart['total'], 2); ?></div>
                         </div>
 
                         <div class="cart_list color2_bg" aria-labelledby="cartDropdown">
                             <ul>
-                                <li>
-                                    <div class="cart_item_wrapper clear_fix">
-                                        <div class="img_holder float_left"><img src="images/shop/9.png" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
+                                <?php if (empty($cart['items'])): ?>
+                                    <li>
+                                        <p style="padding: 15px 0;">Your cart is empty.</p>
+                                    </li>
+                                <?php else: ?>
+                                    <?php foreach ($cart['items'] as $item): ?>
+                                        <li data-product-id="<?php echo (int) $item['id']; ?>">
+                                            <div class="cart_item_wrapper clear_fix">
+                                                <div class="img_holder float_left">
+                                                    <img width="70" src="<?php echo e_cart($item['image']); ?>" alt="Cart Image" class="img-responsive">
+                                                </div> <!-- End of .img_holder -->
 
-                                        <div class="item_deatils float_left">
-                                            <h6>Turmeric Powde</h6>
-                                            <ul>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            </ul>
-                                            <span class="font_fix">$ 34.99</span>
-                                        </div> <!-- End of .item_deatils -->
-                                    </div> <!-- End of .cart_item_wrapper -->
-                                </li>
+                                                <div class="item_deatils float_left">
+                                                    <h6><?php echo e_cart($item['name']); ?></h6>
+                                                    <span class="font_fix">$ <?php echo number_format($item['price'], 2); ?> &times; <?php echo (int) $item['quantity']; ?></span>
+                                                </div> <!-- End of .item_deatils -->
 
-                                <li>
-                                    <div class="cart_item_wrapper clear_fix">
-                                        <div class="img_holder float_left"><img src="images/shop/10.png" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-
-                                        <div class="item_deatils float_left">
-                                            <h6>Pure Jeans Coffee</h6>
-                                            <ul>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            </ul>
-                                            <span class="font_fix">$ 26.99</span>
-                                        </div> <!-- End of .item_deatils -->
-                                    </div> <!-- End of .cart_item_wrapper -->
-                                </li>
-
-                                <li>
-                                    <div class="cart_item_wrapper clear_fix">
-                                        <div class="img_holder float_left"><img src="images/shop/11.png" alt="Cart Image" class="img-responsive"></div> <!-- End of .img_holder -->
-
-                                        <div class="item_deatils float_left">
-                                            <h6>Columbia Chocolate</h6>
-                                            <ul>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            </ul>
-                                            <span class="font_fix">$ 26.99</span>
-                                        </div> <!-- End of .item_deatils -->
-                                    </div> <!-- End of .cart_item_wrapper -->
-                                </li>
+                                                <i class="fa fa-times-circle cart_remove_icon" aria-hidden="true"></i>
+                                            </div> <!-- End of .cart_item_wrapper -->
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </ul>
 
-                            <div class="cart_total clear_fix">
-
-                                <span class="total font_fix float_left">Total - 140$</span>
-                                <a href="#" class="s_color_bg float_right tran3s">View Cart</a>
-                            </div>
+                            <?php if (!empty($cart['items'])): ?>
+                                <div class="cart_total clear_fix">
+                                    <span class="total font_fix float_left cart_total_text">Total - $<?php echo number_format($cart['total'], 2); ?></span>
+                                    <a href="cart.php" class="s_color_bg float_right tran3s">View Cart</a>
+                                </div>
+                            <?php endif; ?>
                         </div> <!-- End of .cart_list -->
                     </div>
 

@@ -6557,3 +6557,34 @@ header .ui-state-default,
   margin-right: 40px;
   background-color: rgb(127, 180, 1);
 }
+
+/* Products Page */
+/* Cart Toast CSS */
+/* Cart "Added to cart" toast notification — used by assets/js/cart.js */
+
+.cart_toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #4caf50;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  z-index: 9999;
+}
+
+.cart_toast_error {
+  background: #e53935;
+}
+
+.cart_toast_visible {
+  opacity: 1;
+  transform: translateY(0);
+}

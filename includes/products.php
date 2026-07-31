@@ -155,8 +155,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                                     </li>
 
 
-                                                    <li class="tultip-op">
-
+                                                    <li class="tultip-op" data-product-id="<?php echo (int) $product['id']; ?>">
                                                         <span class="tultip">
                                                             <i class="fa fa-sort-desc"></i>
                                                             ADD TO CART
@@ -165,7 +164,6 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                                         <a href="#">
                                                             <span class="icon-icon-32846"></span>
                                                         </a>
-
                                                     </li>
 
 
@@ -302,7 +300,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                     </div>
                     <!-- /price_filter -->
 
-                    
+
 
                 </div> <!-- End of .wrapper -->
             </div> <!-- End of .sidebar_styleTwo -->

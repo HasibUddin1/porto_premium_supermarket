@@ -710,7 +710,7 @@ jQuery(document).on('ready', function() {
         selectDropdown();
         removePlaceholder();
         themeMenu();
-        cartItemDismiss();
+        // cartItemDismiss();
         cartOpen();
         FancypopUpVideo();
         CounterNumberChanger();
