@@ -1,38 +1,65 @@
 <?php
+// core/reset.php
+// Handles password reset (POST from reset.php's form)
+//
+// NOTE: this is a SIMPLIFIED reset flow with no email/token verification —
+// anyone who knows an account's email can change its password. That's fine
+// to show a client quickly, but before going live this should become a
+// proper token-based flow: email a one-time reset link, verify the token,
+// then let the user set a new password.
 
-session_start();
-include_once "db_connection.php";
-
-if (isset($_POST['reset'])) {
-
-    $email = $_POST['email'];
-
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-
-
-    if (mysqli_num_rows($result) > 0) {
-
-        $row = mysqli_fetch_assoc($result);
-        $id = $row["id"];
-        $email = $row["email"];
-        $password = $row["password"];
-
-        // SEND EMAIL
-        $from = SUPPORT_EMAIL;
-        $to = $email;
-        $subject = "Password reset";
-        $message = "Hello, $email. Your password is $password";
-        $headers = "From:" . $from;
-        mail($to, $subject, $message, $headers);
-
-        $_SESSION["reset_success"] = "Password sent to your email";
-        header("Location: ../reset");
-    } else {
-
-        $_SESSION["reset_error"] = "Invalid email";
-        $_SESSION["reset_email"] = $email;
-
-        header("Location: ../reset");
-    }
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
+
+require_once __DIR__ . '/db_connection.php'; // exposes $conn
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: ../reset.php');
+    exit;
+}
+
+$email           = trim($_POST['email'] ?? '');
+$newPassword     = $_POST['password'] ?? '';
+$confirmPassword = $_POST['confirm_password'] ?? '';
+
+$errors = [];
+
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'A valid email address is required.';
+}
+if ($newPassword === '' || strlen($newPassword) < 6) {
+    $errors[] = 'Password must be at least 6 characters.';
+}
+if ($newPassword !== $confirmPassword) {
+    $errors[] = 'Passwords do not match.';
+}
+
+if (empty($errors)) {
+    $checkStmt = $conn->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
+    $checkStmt->bind_param('s', $email);
+    $checkStmt->execute();
+    $checkStmt->store_result();
+    if ($checkStmt->num_rows === 0) {
+        $errors[] = 'No account found with that email.';
+    }
+    $checkStmt->close();
+}
+
+if (!empty($errors)) {
+    $_SESSION['reset_errors'] = $errors;
+    header('Location: ../reset.php');
+    exit;
+}
+
+// TEMPORARY: plain-text update, per explicit client-demo request.
+// Switch to: $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+// before going live.
+$updateStmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
+$updateStmt->bind_param('ss', $newPassword, $email);
+$updateStmt->execute();
+$updateStmt->close();
+
+$_SESSION['reset_success'] = 'Password updated successfully. You can log in now.';
+header('Location: ../login.php');
+exit;

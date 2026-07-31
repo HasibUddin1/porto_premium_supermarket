@@ -12,7 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <!-- TODO: need to make the page name dynamic -->
     <?php
     $pageInfo = [
-        "title" => "Porto Premium Supermarket - Product Page",
+        "title" => "Porto Premium Supermarket",
     ];
     ?>
 

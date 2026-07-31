@@ -55,10 +55,13 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                                 <!-- select menu -->
                                 <form action="#" class="select-form">
                                     <div class="g-input f1 mb-30">
-                                        <select class="text-capitalize selectpicker" data-style="g-select" data-width="100%">
-                                            <option value="0" selected="">Sign In</option>
-                                            <option value="1">Sign In</option>
-                                            <option value="2">Register Here</option>
+                                        <select
+                                            class="text-capitalize selectpicker"
+                                            data-style="g-select"
+                                            data-width="100%"
+                                            onchange="if(this.value) window.location.href=this.value;">
+                                            <option value="">Sign In</option>
+                                            <option value="login">Sign In</option>
                                         </select>
                                     </div>
                                 </form>
@@ -158,7 +161,7 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                     <a href="index">Home</a>
                 </li>
 
-                
+
 
                 <li class="<?php echo ($curPageName == 'contact.php') ? 'current_page' : ''; ?>">
                     <a href="contact">Contact us</a>
