@@ -22,6 +22,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <body>
 
+    <!-- TODO: Cloudflare e website development mode e ase, oita update korte hobe kaj shesh hole -->
+
     <div class="main_page">
         <?php include_once "includes/nav.php"; ?>
 

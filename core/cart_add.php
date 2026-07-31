@@ -11,6 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 header('Content-Type: application/json');
 
 require_once __DIR__ . '/db_connection.php'; // exposes $conn
+require_once __DIR__ . '/cart_helper.php';   // reuses get_cart_summary()
 
 function respond($success, $message, $extra = [])
 {
@@ -65,12 +66,6 @@ if (isset($_SESSION['user_id'])) {
         $insertStmt->execute();
         $insertStmt->close();
     }
-
-    $countStmt = $conn->prepare("SELECT COALESCE(SUM(quantity), 0) AS total FROM cart_items WHERE user_id = ?");
-    $countStmt->bind_param('i', $userId);
-    $countStmt->execute();
-    $cartCount = (int) $countStmt->get_result()->fetch_assoc()['total'];
-    $countStmt->close();
 } else {
     // ---------- Guest: PHP session cart ----------
     if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
@@ -82,8 +77,14 @@ if (isset($_SESSION['user_id'])) {
     } else {
         $_SESSION['cart'][$productId] = $quantity;
     }
-
-    $cartCount = array_sum($_SESSION['cart']);
 }
 
-respond(true, 'Product added to cart.', ['cart_count' => $cartCount]);
+// Return the full, up-to-date cart so the header dropdown can be
+// rebuilt in JS without a page reload.
+$cart = get_cart_summary($conn);
+
+respond(true, 'Product added to cart.', [
+    'cart_count' => $cart['count'],
+    'cart_total' => number_format($cart['total'], 2),
+    'items'      => $cart['items'],
+]);
