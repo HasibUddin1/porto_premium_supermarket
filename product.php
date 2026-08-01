@@ -416,7 +416,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                                 <span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span>
                                                                                 <a href="cart_add.php?product_id=<?php echo (int) $rel['id']; ?>"><span class="icon-icon-32846"></span></a>
                                                                             </li>
-                                                                            <li><a href="#"><span class="fa fa-heart-o"></span></a></li>
+                                                                            
                                                                         </ul>
                                                                     </div>
                                                                 </div>

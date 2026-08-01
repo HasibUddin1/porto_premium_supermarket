@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footer_logo">
-                    <a href="index.html"><img src="images/logo/porto_logo_dark2.webp" alt="Logo" /></a>
+                    <a href="index"><img src="images/logo/porto_logo_dark2.webp" alt="Logo" /></a>
                     <p>
                         Denouncing pleasures and praising pain was born and I will
                         give you a complete account of the system.
@@ -123,7 +123,7 @@
         <div class="container">
             <h6 class="pull-left">
                 Copyrights © 2026 All Rights Reserved by<a
-                    href="#">Porto Premium Supermarket</a>
+                    href="index">Porto Premium Supermarket</a>
             </h6>
             <ul class="social_icon pull-right">
                 <li>

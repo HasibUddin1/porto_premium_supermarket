@@ -18,7 +18,7 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                 <div class="state" id="value1">
                     <ul>
                         <li><i class="fa fa-user s_color" aria-hidden="true"></i><a href="#">Account</a></li>
-                        <li><i class="fa fa-heart s_color" aria-hidden="true"></i><a href="#">Whishlist </a></li>
+                        <li><i class="fa fa-shopping-basket s_color" aria-hidden="true"></i><a href="shop">Our Store</a></li>
                     </ul>
 
                 </div>

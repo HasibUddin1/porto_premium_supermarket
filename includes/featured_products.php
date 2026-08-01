@@ -140,11 +140,7 @@ ORDER BY products.id DESC
                                                 </a>
                                             </li>
 
-                                            <li>
-                                                <a href="#">
-                                                    <span class="fa fa-heart-o"></span>
-                                                </a>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
 

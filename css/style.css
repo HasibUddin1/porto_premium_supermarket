@@ -6588,3 +6588,37 @@ header .ui-state-default,
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Homepage Special Deals */
+
+.special_deals .text {
+  height: 260px;
+}
+
+/* Homepage Category Section */
+.gallery .extra-category {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.gallery .extra-category.reveal {
+  opacity: 1;
+}
+
+.gallery .thm-btn {
+  transition: none;
+  line-height: 20px;
+  border-width: 0px;
+  margin: 0px;
+  padding: 12px 45px;
+  letter-spacing: 0px;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: #7fb401;
+  color: white;
+}
+
+.gallery .thm-btn:hover {
+  background-color: lightgray;
+  color: #7fb401;
+  transition: all 0.3s ease-in-out;
+}

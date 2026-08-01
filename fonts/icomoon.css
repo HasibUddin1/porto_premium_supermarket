@@ -1,17 +1,19 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('icomoon87d8.eot?unrayo');
-  src:  url('icomoon87d8.eot?unrayo#iefix') format('embedded-opentype'),
-    url('icomoon87d8.ttf?unrayo') format('truetype'),
-    url('icomoon87d8.woff?unrayo') format('woff'),
-    url('icomoon87d8.svg?unrayo#icomoon') format('svg');
+  font-family: "icomoon";
+  src: url("icomoon87d8.eot?unrayo");
+  src:
+    url("icomoon87d8.eot?unrayo#iefix") format("embedded-opentype"),
+    url("icomoon87d8.ttf?unrayo") format("truetype"),
+    url("icomoon87d8.woff?unrayo") format("woff"),
+    url("icomoon87d8.svg?unrayo#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: "icomoon" !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -370,3 +372,24 @@
   content: "\e828";
 }
 
+/* Fish Icon */
+.icon-fish:before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 20 50 C 20 25, 60 25, 75 40 L 95 20 L 90 50 L 95 80 L 75 60 C 60 75, 20 75, 20 50 Z' stroke='%237fb401' stroke-width='4' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3Cpath d='M 55 28 Q 60 12 70 32' stroke='%237fb401' stroke-width='4' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3Cpath d='M 45 60 Q 52 72 42 74' stroke='%237fb401' stroke-width='4' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3Ccircle cx='35' cy='42' r='4' fill='%237fb401' /%3E%3Cpath d='M 23 55 Q 27 60 32 56' stroke='%237fb401' stroke-width='3' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3C/svg%3E");
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  vertical-align: middle;
+  font-size: inherit;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.why_choose_us .choose_us_item:hover .icon .icon-fish:before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 20 50 C 20 25, 60 25, 75 40 L 95 20 L 90 50 L 95 80 L 75 60 C 60 75, 20 75, 20 50 Z' stroke='white' stroke-width='4' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3Cpath d='M 55 28 Q 60 12 70 32' stroke='white' stroke-width='4' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3Cpath d='M 45 60 Q 52 72 42 74' stroke='white' stroke-width='4' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3Ccircle cx='35' cy='42' r='4' fill='white' /%3E%3Cpath d='M 23 55 Q 27 60 32 56' stroke='white' stroke-width='3' fill='none' stroke-linejoin='round' stroke-linecap='round' /%3E%3C/svg%3E");
+}

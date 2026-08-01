@@ -65,3 +65,27 @@
 
 <!-- Cart JS -->
 <script type="text/javascript" src="js/cart.js"></script>
+
+
+<!-- Homepage Category JS -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var showMoreBtn = document.getElementById('showMoreCategoriesBtn');
+        if (!showMoreBtn) return;
+
+        showMoreBtn.addEventListener('click', function() {
+            var hiddenItems = document.querySelectorAll('#categoryRow .extra-category');
+
+            hiddenItems.forEach(function(item, i) {
+                setTimeout(function() {
+                    item.style.display = 'inline-block';
+                    // Force a reflow so the opacity transition actually plays
+                    void item.offsetWidth;
+                    item.classList.add('reveal');
+                }, i * 70); // slight stagger, so items fade in one after another
+            });
+
+            showMoreBtn.remove();
+        });
+    });
+</script>

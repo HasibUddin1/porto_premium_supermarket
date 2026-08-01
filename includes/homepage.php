@@ -12,14 +12,14 @@
                     data-easein="default"
                     data-easeout="default"
                     data-masterspeed="default"
-                    data-thumb="images/home/slide-1.jpg"
+                    data-thumb="images/home/slide-1.webp"
                     data-rotate="0"
                     data-saveperformance="off"
                     data-title="Business Solutions"
                     data-description="">
                     <!-- MAIN IMAGE -->
                     <img
-                        src="images/home/slide-1.jpg"
+                        src="images/home/slide-1.webp"
                         alt="image"
                         data-bgposition="center center"
                         data-bgfit="cover"
@@ -130,14 +130,14 @@
                     data-easein="Power4.easeInOut"
                     data-easeout="Power4.easeInOut"
                     data-masterspeed="2000"
-                    data-thumb="images/home/slide-2.jpg"
+                    data-thumb="images/home/slide-2.webp"
                     data-rotate="0"
                     data-saveperformance="off"
                     data-title="Successful Careers"
                     data-description="">
                     <!-- MAIN IMAGE -->
                     <img
-                        src="images/home/slide-2.jpg"
+                        src="images/home/slide-2.webp"
                         alt=""
                         data-bgposition="top center"
                         class="rev-slidebg"
@@ -181,9 +181,7 @@
                         </div>
                         <div class="banner-caption-p">
                             <p>
-                                Great explorer of the truth, the master-builder of human
-                                happiness no sed one rejects <br />dislikes, or avoids
-                                pleasure itself, because it is pleasure.
+                                Discover fresh groceries, premium products, and everyday essentials carefully selected <br> to deliver a convenient, trusted, and enjoyable shopping experience for your entire family.
                             </p>
                         </div>
                         <a href="#featured_products" class="thm-btn contuct-us">shop now</a>
@@ -198,14 +196,14 @@
                     data-easein="Power4.easeInOut"
                     data-easeout="Power4.easeInOut"
                     data-masterspeed="2000"
-                    data-thumb="images/home/slide-3.jpg"
+                    data-thumb="images/home/slide-3.webp"
                     data-rotate="0"
                     data-saveperformance="off"
                     data-title="Your Success"
                     data-description="">
                     <!-- MAIN IMAGE -->
                     <img
-                        src="images/home/slide-3.jpg"
+                        src="images/home/slide-3.webp"
                         alt=""
                         data-bgposition="top center"
                         class="rev-slidebg"
@@ -348,14 +346,12 @@
 <section class="why_choose_us">
     <div
         class="theme_title_bg"
-        style="background-image: url(images/background/1.jpg)">
+        style="background-image: url(images/background/1.webp)">
         <div class="theme_title center">
             <div class="container">
                 <h2>Why to Choose Us</h2>
                 <p>
-                    There are many variations of passages of Lorem Ipsum available,
-                    but the majority have suffered <br />alteration in some form, by
-                    injected humour.
+                    From crisp vegetables and pure dairy to the freshest catch, aromatic spices, and healthy biscuits <br> – we deliver your complete grocery wishlist with utmost care.
                 </p>
             </div>
         </div>
@@ -373,11 +369,9 @@
                     </div>
                     <!-- End of .icon -->
                     <div class="text float_left">
-                        <h5 class="tran3s">100% Organic Products</h5>
+                        <h5 class="tran3s">Fresh Veggies & Pure Spices</h5>
                         <p class="tran3s">
-                            Duis aute irure dolor in reprehenderit voluptate velit esse
-                            seds cillum dolore eu fugiat nulla pariatur excepteur sint
-                            occaecat.
+                            We bring you farm-fresh, seasonal vegetables sourced directly from local growers, paired with authentic, pesticide-free spices to elevate every dish naturally.
                         </p>
                     </div>
                     <!-- End of .text -->
@@ -395,11 +389,9 @@
                     </div>
                     <!-- End of .icon -->
                     <div class="text float_left">
-                        <h5 class="tran3s">Any Time, Anywhere Delivery</h5>
+                        <h5 class="tran3s">Farm-Fresh Dairy Delivered</h5>
                         <p class="tran3s">
-                            Duis aute irure dolor in reprehenderit voluptate velit esse
-                            seds cillum dolore eu fugiat nulla pariatur excepteur sint
-                            occaecat.
+                            Our premium dairy range includes farm-fresh milk, creamy curd, and pure ghee, all delivered chilled to your doorstep at your preferred time, every day.
                         </p>
                     </div>
                     <!-- End of .text -->
@@ -413,15 +405,13 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="choose_us_item tran3s">
                     <div class="icon p_color_bg border_round float_left">
-                        <span class="ficon icon-food-2"></span>
+                        <span class="ficon icon-fish"></span>
                     </div>
                     <!-- End of .icon -->
                     <div class="text float_left">
-                        <h5 class="tran3s">Keeps Your Family Healthy</h5>
+                        <h5 class="tran3s">Premium Fish for Healthy Family</h5>
                         <p class="tran3s">
-                            Duis aute irure dolor in reprehenderit voluptate velit esse
-                            seds cillum dolore eu fugiat nulla pariatur excepteur sint
-                            occaecat.
+                            Enjoy our premium fish selection, cleaned and packed fresh daily – rich in omega-3s and essential proteins to keep your family strong and heart-healthy.
                         </p>
                     </div>
                     <!-- End of .text -->
@@ -439,11 +429,9 @@
                     </div>
                     <!-- End of .icon -->
                     <div class="text float_left">
-                        <h5 class="tran3s">Clean, Fresh and Safety</h5>
+                        <h5 class="tran3s">Crunchy Biscuits & Safe Spices</h5>
                         <p class="tran3s">
-                            Duis aute irure dolor in reprehenderit voluptate velit esse
-                            seds cillum dolore eu fugiat nulla pariatur excepteur sint
-                            occaecat.
+                            Explore our wholesome dry foods, including crunchy biscuits and healthy snacks, alongside exotic spices – all safely sealed for lasting freshness and pure taste.
                         </p>
                     </div>
                     <!-- End of .text -->
@@ -456,222 +444,78 @@
     </div>
     <!-- End of .container -->
 </section>
-<!-- End of why chooreus -->
+<!-- End of why choose us -->
 
-<!--gallery Section-->
+
+<!-- Categories fetch -->
+<?php
+require_once __DIR__ . '/../core/db_connection.php'; // exposes $conn
+
+$categoryResult = $conn->query("SELECT id, name, slug, image FROM categories ORDER BY name");
+?>
+
+<!--Category Section-->
 <section class="gallery">
     <div class="container">
         <div class="theme_title">
-            <h3>Top Selling Products</h3>
+            <h3>SHOP BY CATEGORY</h3>
         </div>
 
-        <div class="row filter-list clearfix">
-            <!--Default Item-->
-            <div
-                class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all beauty others"
-                style="display: inline-block">
-                <div class="inner-box">
-                    <div class="single-item center">
-                        <figure class="image-box">
-                            <img src="images/gallery/1.jpg" alt="" />
-                        </figure>
-                        <div class="overlay-box">
-                            <div class="inner">
-                                <div class="image-view">
-                                    <div class="icon-holder">
-                                        <a
-                                            href="images/gallery/1.jpg"
-                                            class="fancybox"
-                                            data-fancybox-group="home-gallery"
-                                            title="Gardener Gallery"><span class="icon-magnifier"></span></a>
-                                    </div>
-                                </div>
-                                <div class="bottom-content">
-                                    <h4><a href="#">Coffee Break Cake</a></h4>
-                                    <div class="price">
-                                        $12.99 <span class="prev-rate">$14.99</span>
-                                    </div>
-                                    <div class="icon-box">
-                                        <a href="shop-cart.html"><span class="icon-icon-32846"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row filter-list clearfix" id="categoryRow">
 
-            <!--Default Item-->
-            <div
-                class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all others"
-                style="display: inline-block">
-                <div class="inner-box">
-                    <div class="single-item center">
-                        <figure class="image-box">
-                            <img src="images/gallery/2.jpg" alt="" />
-                        </figure>
-                        <div class="overlay-box">
-                            <div class="inner">
-                                <div class="image-view">
-                                    <div class="icon-holder">
-                                        <a
-                                            href="images/gallery/1.jpg"
-                                            class="fancybox"
-                                            data-fancybox-group="home-gallery"
-                                            title="Gardener Gallery"><span class="icon-magnifier"></span></a>
-                                    </div>
-                                </div>
-                                <div class="bottom-content">
-                                    <h4><a href="#">Coffee Break Cake</a></h4>
-                                    <div class="price">
-                                        $12.99 <span class="prev-rate">$14.99</span>
-                                    </div>
-                                    <div class="icon-box">
-                                        <a href="shop-cart.html"><span class="icon-icon-32846"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php $categoryIndex = 0; ?>
+            <?php while ($category = mysqli_fetch_assoc($categoryResult)): $categoryIndex++; ?>
 
-            <!--Default Item-->
-            <div
-                class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all fruits vegetables beauty"
-                style="display: inline-block">
-                <div class="inner-box">
-                    <div class="single-item center">
-                        <figure class="image-box">
-                            <img src="images/gallery/3.jpg" alt="" />
-                        </figure>
-                        <div class="overlay-box">
-                            <div class="inner">
-                                <div class="image-view">
-                                    <div class="icon-holder">
-                                        <a
-                                            href="images/gallery/1.jpg"
-                                            class="fancybox"
-                                            data-fancybox-group="home-gallery"
-                                            title="Gardener Gallery"><span class="icon-magnifier"></span></a>
+                <!--Default Item-->
+                <div
+                    class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all <?php echo htmlspecialchars($category['slug']); ?><?php echo $categoryIndex > 6 ? ' extra-category' : ''; ?>"
+                    style="display: <?php echo $categoryIndex > 6 ? 'none' : 'inline-block'; ?>;">
+                    <div class="inner-box">
+                        <div class="single-item center">
+                            <figure class="image-box">
+                                <img src="<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
+                            </figure>
+                            <div class="overlay-box">
+                                <div class="inner">
+                                    <div class="image-view">
+                                        <div class="icon-holder">
+                                            <a
+                                                href="<?php echo htmlspecialchars($category['image']); ?>"
+                                                class="fancybox"
+                                                data-fancybox-group="home-gallery"
+                                                title="<?php echo htmlspecialchars($category['name']); ?>"><span class="icon-magnifier"></span></a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="bottom-content">
-                                    <h4><a href="#">Coffee Break Cake</a></h4>
-                                    <div class="price">
-                                        $12.99 <span class="prev-rate">$14.99</span>
-                                    </div>
-                                    <div class="icon-box">
-                                        <a href="shop-cart.html"><span class="icon-icon-32846"></span></a>
+                                    <div class="bottom-content">
+                                        <h4><a href="shop?category=<?php echo (int) $category['id']; ?>"><?php echo htmlspecialchars($category['name']); ?></a></h4>
+                                        <div class="icon-box">
+                                            <a href="shop?category=<?php echo (int) $category['id']; ?>"><span class="icon-icon-32846"></span></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!--Default Item-->
-            <div
-                class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all beauty others"
-                style="display: inline-block">
-                <div class="inner-box">
-                    <div class="single-item center">
-                        <figure class="image-box">
-                            <img src="images/gallery/4.jpg" alt="" />
-                        </figure>
-                        <div class="overlay-box">
-                            <div class="inner">
-                                <div class="image-view">
-                                    <div class="icon-holder">
-                                        <a href="images/gallery/1.jpg" class="fancybox"><span class="icon-magnifier"></span></a>
-                                    </div>
-                                </div>
-                                <div class="bottom-content">
-                                    <h4><a href="#">Coffee Break Cake</a></h4>
-                                    <div class="price">
-                                        $12.99 <span class="prev-rate">$14.99</span>
-                                    </div>
-                                    <div class="icon-box">
-                                        <a href="shop-cart.html"><span class="icon-icon-32846"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endwhile; ?>
 
-            <!--Default Item-->
-            <div
-                class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all fruits others"
-                style="display: inline-block">
-                <div class="inner-box">
-                    <div class="single-item center">
-                        <figure class="image-box">
-                            <img src="images/gallery/5.jpg" alt="" />
-                        </figure>
-                        <div class="overlay-box">
-                            <div class="inner">
-                                <div class="image-view">
-                                    <div class="icon-holder">
-                                        <a href="images/gallery/1.jpg" class="fancybox"><span class="icon-magnifier"></span></a>
-                                    </div>
-                                </div>
-                                <div class="bottom-content">
-                                    <h4><a href="#">Coffee Break Cake</a></h4>
-                                    <div class="price">
-                                        $12.99 <span class="prev-rate">$14.99</span>
-                                    </div>
-                                    <div class="icon-box">
-                                        <a href="shop-cart.html"><span class="icon-icon-32846"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Default Item-->
-            <div
-                class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all fruits vegetables beauty others"
-                style="display: inline-block">
-                <div class="inner-box">
-                    <div class="single-item center">
-                        <figure class="image-box">
-                            <img src="images/gallery/6.jpg" alt="" />
-                        </figure>
-                        <div class="overlay-box">
-                            <div class="inner">
-                                <div class="image-view">
-                                    <div class="icon-holder">
-                                        <a href="images/gallery/1.jpg" class="fancybox"><span class="icon-magnifier"></span></a>
-                                    </div>
-                                </div>
-                                <div class="bottom-content">
-                                    <h4><a href="#">Coffee Break Cake</a></h4>
-                                    <div class="price">
-                                        $12.99 <span class="prev-rate">$14.99</span>
-                                    </div>
-                                    <div class="icon-box">
-                                        <a href="shop-cart.html"><span class="icon-icon-32846"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
+        <?php if ($categoryIndex > 6): ?>
+            <div class="show_more_wrapper" style="text-align: center; margin-top: 25px;">
+                <button type="button" id="showMoreCategoriesBtn" class="thm-btn">Show More</button>
+            </div>
+        <?php endif; ?>
+
     </div>
 </section>
 <!-- End of section -->
 
-<section class="news">
+<section class="news special_deals">
     <div class="container">
         <div class="theme_title center">
-            <h3>our latest news</h3>
+            <h3>Great Products. Better Prices. Every Day.</h3>
         </div>
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
@@ -685,7 +529,7 @@
                             class="img-responsive" />
                         <div class="opacity tran3s">
                             <div class="icon">
-                                <span><a href="blog-details.html" class="border_round">+</a></span>
+                                <span><a href="shop" class="border_round">+</a></span>
                             </div>
                             <!-- End of .icon -->
                         </div>
@@ -693,28 +537,23 @@
                     </div>
                     <!-- End of .img_holder -->
                     <div class="post">
-                        <ul>
+                        <ul class="text-center">
                             <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> Healthy</a>
+                                <a href="shop" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> DEAL OF THE DAY</a>
                             </li>
                             <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> J21st
-                                    Aug, 2015</a>
-                            </li>
-                            <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-comments" aria-hidden="true"></i> 26</a>
+                                <a href="shop" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> August 1, 2026</a>
                             </li>
                         </ul>
                         <div class="text">
                             <h4>
-                                <a href="blog-details.html">You should add 5 things in your daily meals.</a>
+                                <a href="shop">Fresh Picks at Special Prices</a>
                             </h4>
                             <p>
-                                As more and more people are turning to organic lifestyles
-                                & trying improve their health...
+                                Enjoy selected supermarket favorites at special prices, available for today only. Shop early and make the most of our daily savings.
                             </p>
                             <div class="link">
-                                <a href="#" class="tran3s">READ MORE<span class="fa fa-sort-desc"></span></a>
+                                <a href="shop" class="tran3s">Shop now<span class="fa fa-sort-desc"></span></a>
                             </div>
                         </div>
                     </div>
@@ -732,7 +571,7 @@
                             class="img-responsive" />
                         <div class="opacity tran3s">
                             <div class="icon">
-                                <span><a href="blog-details.html" class="border_round">+</a></span>
+                                <span><a href="shop" class="border_round">+</a></span>
                             </div>
                             <!-- End of .icon -->
                         </div>
@@ -740,28 +579,23 @@
                     </div>
                     <!-- End of .img_holder -->
                     <div class="post">
-                        <ul>
+                        <ul class="text-center">
                             <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> Healthy</a>
+                                <a href="shop" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> WEEKLY SPECIAL</a>
                             </li>
                             <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> J21st
-                                    Aug, 2015</a>
-                            </li>
-                            <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-comments" aria-hidden="true"></i> 26</a>
+                                <a href="shop" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> July 29, 2026</a>
                             </li>
                         </ul>
                         <div class="text">
                             <h4>
-                                <a href="blog-details.html">You should add 5 things in your daily meals.</a>
+                                <a href="shop">Weekly Savings on Essentials</a>
                             </h4>
                             <p>
-                                As more and more people are turning to organic lifestyles
-                                & trying improve their health...
+                                Save more on carefully selected everyday essentials with our weekly special offers, bringing great value to your regular grocery shopping.
                             </p>
                             <div class="link">
-                                <a href="#" class="tran3s">READ MORE<span class="fa fa-sort-desc"></span></a>
+                                <a href="shop" class="tran3s">Shop now<span class="fa fa-sort-desc"></span></a>
                             </div>
                         </div>
                     </div>
@@ -779,7 +613,7 @@
                             class="img-responsive" />
                         <div class="opacity tran3s">
                             <div class="icon">
-                                <span><a href="blog-details.html" class="border_round">+</a></span>
+                                <span><a href="shop" class="border_round">+</a></span>
                             </div>
                             <!-- End of .icon -->
                         </div>
@@ -787,28 +621,23 @@
                     </div>
                     <!-- End of .img_holder -->
                     <div class="post">
-                        <ul>
+                        <ul class="text-center">
                             <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> Healthy</a>
+                                <a href="shop" class="tran3s"><i class="fa fa-tag" aria-hidden="true"></i> MONTHLY SPECIAL</a>
                             </li>
                             <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> J21st
-                                    Aug, 2015</a>
-                            </li>
-                            <li>
-                                <a href="blog-details.html" class="tran3s"><i class="fa fa-comments" aria-hidden="true"></i> 26</a>
+                                <a href="shop" class="tran3s"><i class="fa fa-clock-o" aria-hidden="true"></i> July 26, 2026</a>
                             </li>
                         </ul>
                         <div class="text">
                             <h4>
-                                <a href="blog-details.html">You should add 5 things in your daily meals.</a>
+                                <a href="shop">More Value for Your Family</a>
                             </h4>
                             <p>
-                                As more and more people are turning to organic lifestyles
-                                & trying improve their health...
+                                Discover our monthly special offers featuring popular grocery essentials and household favorites, giving your family more value throughout the month.
                             </p>
                             <div class="link">
-                                <a href="#" class="tran3s">READ MORE<span class="fa fa-sort-desc"></span></a>
+                                <a href="shop" class="tran3s">Shop now<span class="fa fa-sort-desc"></span></a>
                             </div>
                         </div>
                     </div>
