@@ -74,13 +74,14 @@
         if (!showMoreBtn) return;
 
         showMoreBtn.addEventListener('click', function() {
-            var hiddenItems = document.querySelectorAll('#categoryRow .extra-category');
+            var extraRow = document.getElementById('extraCategoryRow');
+            if (!extraRow) return;
 
-            hiddenItems.forEach(function(item, i) {
+            extraRow.style.display = 'block';
+
+            var items = extraRow.querySelectorAll('.extra-category-item');
+            items.forEach(function(item, i) {
                 setTimeout(function() {
-                    item.style.display = 'inline-block';
-                    // Force a reflow so the opacity transition actually plays
-                    void item.offsetWidth;
                     item.classList.add('reveal');
                 }, i * 70); // slight stagger, so items fade in one after another
             });

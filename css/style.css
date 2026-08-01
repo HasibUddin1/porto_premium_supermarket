@@ -2271,7 +2271,7 @@ select.g-select[option="selected"] {
   display: none;
 }
 
-.gallery .filter-list .single-item {
+.gallery .single-item {
   margin-bottom: 30px;
 }
 

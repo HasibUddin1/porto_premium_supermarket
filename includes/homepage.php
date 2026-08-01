@@ -452,6 +452,14 @@
 require_once __DIR__ . '/../core/db_connection.php'; // exposes $conn
 
 $categoryResult = $conn->query("SELECT id, name, slug, image FROM categories ORDER BY name");
+
+$categories = [];
+while ($row = mysqli_fetch_assoc($categoryResult)) {
+    $categories[] = $row;
+}
+
+$visibleCategories = array_slice($categories, 0, 6);
+$extraCategories   = array_slice($categories, 6);
 ?>
 
 <!--Category Section-->
@@ -461,15 +469,25 @@ $categoryResult = $conn->query("SELECT id, name, slug, image FROM categories ORD
             <h3>SHOP BY CATEGORY</h3>
         </div>
 
+        <!--
+            NOTE: MixItUp (the filtering/masonry library the theme uses on
+            .filter-list) manages items with position:absolute + a
+            JS-calculated container height. Extra (7th+) categories live in
+            a separate #extraCategoryRow below, OUTSIDE this container, so
+            MixItUp never scans or manages them — that's what avoids the
+            leftover blank space / off-center button from before. They keep
+            the same "mix mix_all default-item all <slug>" classes purely
+            for CSS styling (the hover overlay effect) since MixItUp only
+            manages children of .filter-list, and this row isn't one.
+        -->
         <div class="row filter-list clearfix" id="categoryRow">
 
-            <?php $categoryIndex = 0; ?>
-            <?php while ($category = mysqli_fetch_assoc($categoryResult)): $categoryIndex++; ?>
+            <?php foreach ($visibleCategories as $category): ?>
 
                 <!--Default Item-->
                 <div
-                    class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all <?php echo htmlspecialchars($category['slug']); ?><?php echo $categoryIndex > 6 ? ' extra-category' : ''; ?>"
-                    style="display: <?php echo $categoryIndex > 6 ? 'none' : 'inline-block'; ?>;">
+                    class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all <?php echo htmlspecialchars($category['slug']); ?>"
+                    style="display: inline-block">
                     <div class="inner-box">
                         <div class="single-item center">
                             <figure class="image-box">
@@ -498,14 +516,54 @@ $categoryResult = $conn->query("SELECT id, name, slug, image FROM categories ORD
                     </div>
                 </div>
 
-            <?php endwhile; ?>
+            <?php endforeach; ?>
 
-        </div>
+        </div> <!-- End of #categoryRow -->
 
-        <?php if ($categoryIndex > 6): ?>
-            <div class="show_more_wrapper" style="text-align: center; margin-top: 25px;">
-                <button type="button" id="showMoreCategoriesBtn" class="thm-btn">Show More</button>
+        <?php if (!empty($extraCategories)): ?>
+
+            <!-- Plain row, deliberately NOT part of the .filter-list / .mix system -->
+            <div class="row clearfix" id="extraCategoryRow" style="display: none;">
+
+                <?php foreach ($extraCategories as $category): ?>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all extra-category-item <?php echo htmlspecialchars($category['slug']); ?>" style="display: inline-block;">
+                        <div class="inner-box">
+                            <div class="single-item center">
+                                <figure class="image-box">
+                                    <img src="<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
+                                </figure>
+                                <div class="overlay-box">
+                                    <div class="inner">
+                                        <div class="image-view">
+                                            <div class="icon-holder">
+                                                <a
+                                                    href="<?php echo htmlspecialchars($category['image']); ?>"
+                                                    class="fancybox"
+                                                    data-fancybox-group="home-gallery"
+                                                    title="<?php echo htmlspecialchars($category['name']); ?>"><span class="icon-magnifier"></span></a>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-content">
+                                            <h4><a href="shop?category=<?php echo (int) $category['id']; ?>"><?php echo htmlspecialchars($category['name']); ?></a></h4>
+                                            <div class="icon-box">
+                                                <a href="shop?category=<?php echo (int) $category['id']; ?>"><span class="icon-icon-32846"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div> <!-- End of #extraCategoryRow -->
+
+            <div class="show_more_wrapper d-flex justify-content-center" style="text-align: center; margin-top: 25px; clear: both; width: 100%;">
+                <button type="button" id="showMoreCategoriesBtn" class="color1_bg thm-btn">Show More</button>
             </div>
+
         <?php endif; ?>
 
     </div>
