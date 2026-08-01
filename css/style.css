@@ -6596,12 +6596,16 @@ header .ui-state-default,
 }
 
 /* Homepage Category Section */
-.gallery .extra-category {
+.gallery .extra-category-item {
   opacity: 0;
-  transition: opacity 0.45s ease;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.gallery .extra-category.reveal {
+.gallery .extra-category-item.reveal {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .gallery .thm-btn {
@@ -6618,6 +6622,27 @@ header .ui-state-default,
 }
 
 .gallery .thm-btn:hover {
+  background-color: lightgray;
+  color: #7fb401;
+  transition: all 0.3s ease-in-out;
+}
+
+
+/* Product page CSS */
+.shop_page .thm-btn {
+  transition: none;
+  line-height: 20px;
+  border-width: 0px;
+  margin: 0px;
+  padding: 12px 45px;
+  letter-spacing: 0px;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: #7fb401;
+  color: white;
+}
+
+.shop_page .thm-btn:hover {
   background-color: lightgray;
   color: #7fb401;
   transition: all 0.3s ease-in-out;

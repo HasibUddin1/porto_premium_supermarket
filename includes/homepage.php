@@ -285,21 +285,19 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12t">
                 <div
                     class="item wow fadeInLef"
-                    style="background-image: url(images/about/1.jpg)">
+                    style="background-image: url(images/about/1.webp)">
                     <div class="offer-sec">
                         <div class="inner-title">
-                            For All Cosmetics
+                            FOR ALL HALAL MEAT
                             <div class="offer">
                                 <span>30% <br />OFF</span>
                             </div>
                         </div>
                     </div>
                     <div class="content">
-                        <h3>We Grow Beauty</h3>
+                        <h3>Fresh Halal Meat</h3>
                         <p>
-                            It is a long established fact that a reader will be <br />
-                            distracted by the readable content of a page when <br />
-                            looking organic cosmetics.
+                            Enjoy quality halal meat, carefully selected <br> for freshness and delicious family meals <br> every day.
                         </p>
                         <div class="link-btn">
                             <a href="shop" class="tran3s">More Products<span class="fa fa-sort-desc"></span></a>
@@ -310,21 +308,19 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12t">
                 <div
                     class="item wow fadeInRight"
-                    style="background-image: url(images/about/2.jpg)">
+                    style="background-image: url(images/about/2.webp)">
                     <div class="offer-sec">
                         <div class="inner-title">
-                            For All Cosmetics
+                            FOR FRESH VEGETABLES
                             <div class="offer">
                                 <span>30% <br />OFF</span>
                             </div>
                         </div>
                     </div>
                     <div class="content">
-                        <h3>We Grow Beauty</h3>
+                        <h3>We Grow Fresh</h3>
                         <p>
-                            It is a long established fact that a reader will be <br />
-                            distracted by the readable content of a page when <br />
-                            looking organic cosmetics.
+                            Discover fresh vegetables carefully selected <br> for quality, freshness and healthy <br> everyday family meals.
                         </p>
                         <div class="link-btn">
                             <a href="shop" class="tran3s">More Products<span class="fa fa-sort-desc"></span></a>

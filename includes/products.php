@@ -26,6 +26,15 @@ $maxPrice = isset($_GET['max_price']) ? (float)$_GET['max_price'] : $dbMaxPrice;
 
 /*
 |--------------------------------------------------------------------------
+| Category filter
+|--------------------------------------------------------------------------
+*/
+
+$categoryId = isset($_GET['category']) ? (int) $_GET['category'] : 0;
+
+
+/*
+|--------------------------------------------------------------------------
 | Products
 |--------------------------------------------------------------------------
 */
@@ -38,8 +47,13 @@ FROM products
 LEFT JOIN categories
 ON products.category_id = categories.id
 WHERE products.price BETWEEN $minPrice AND $maxPrice
-ORDER BY products.id DESC
 ";
+
+if ($categoryId > 0) {
+    $sql .= " AND products.category_id = $categoryId ";
+}
+
+$sql .= " ORDER BY products.id DESC ";
 
 $result = mysqli_query($conn, $sql);
 
@@ -75,6 +89,14 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                 <div class="row">
 
                     <!--Default Item-->
+                    <?php if (mysqli_num_rows($result) === 0): ?>
+
+                        <div class="col-12">
+                            <p style="padding: 20px 0;">No products found for this filter.</p>
+                        </div>
+
+                    <?php endif; ?>
+
                     <?php while ($product = mysqli_fetch_assoc($result)): ?>
 
                         <div class="col-md-4 col-sm-6 col-xs-12 default-item">
@@ -87,8 +109,8 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                     <figure class="image-box">
 
                                         <img
-                                            src="<?php echo $product['image']; ?>"
-                                            alt="<?php echo $product['name']; ?>">
+                                            src="<?php echo htmlspecialchars($product['image']); ?>"
+                                            alt="<?php echo htmlspecialchars($product['name']); ?>">
 
                                         <?php if ($product['status'] == "New"): ?>
 
@@ -111,8 +133,8 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                     <div class="content">
 
                                         <h3>
-                                            <a href="product.php?id=<?php echo $product['id']; ?>">
-                                                <?php echo $product['name']; ?>
+                                            <a href="product.php?id=<?php echo (int) $product['id']; ?>">
+                                                <?php echo htmlspecialchars($product['name']); ?>
                                             </a>
                                         </h3>
 
@@ -130,7 +152,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
 
                                         <div class="price">
 
-                                            $<?php echo $product['price']; ?>
+                                            $<?php echo htmlspecialchars($product['price']); ?>
 
                                         </div>
 
@@ -149,7 +171,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                                 <ul>
 
                                                     <li>
-                                                        <a href="product.php?id=<?php echo $product['id']; ?>">
+                                                        <a href="product.php?id=<?php echo (int) $product['id']; ?>">
                                                             <span class="fa fa-eye"></span>
                                                         </a>
                                                     </li>
@@ -190,7 +212,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
 
 
                                                 <p>
-                                                    <?php echo $product['description']; ?>
+                                                    <?php echo htmlspecialchars($product['description']); ?>
                                                 </p>
 
 
@@ -218,6 +240,11 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
             <!-- _______________________ SIDEBAR ____________________ -->
             <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 sidebar_styleTwo">
                 <div class="wrapper">
+
+                    <div class="all_products_btn" style="margin-bottom: 20px;">
+                        <a href="shop" class="thm-btn color1_bg" style="display: block; text-align: center; padding: 10px 0;">All Products</a>
+                    </div>
+
                     <div class="sidebar_search">
                         <form action="#">
                             <input type="text">
@@ -237,11 +264,13 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                             <?php while ($category = mysqli_fetch_assoc($categoryResult)): ?>
 
                                 <li>
-                                    <a href="shop?category=<?php echo $category['id']; ?>" class="tran3s">
+                                    <a
+                                        href="shop?category=<?php echo (int) $category['id']; ?>"
+                                        class="tran3s<?php echo ($categoryId === (int) $category['id']) ? ' active_category' : ''; ?>">
 
-                                        <?php echo $category['name']; ?>
+                                        <?php echo htmlspecialchars($category['name']); ?>
 
-                                        (<?php echo $category['total_products']; ?>)
+                                        (<?php echo (int) $category['total_products']; ?>)
 
                                     </a>
                                 </li>
@@ -262,6 +291,10 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                         <div class="single-sidebar price-ranger">
 
                             <form action="" method="GET">
+
+                                <?php if ($categoryId > 0): ?>
+                                    <input type="hidden" name="category" value="<?php echo (int) $categoryId; ?>">
+                                <?php endif; ?>
 
                                 <div id="slider-range"></div>
 
