@@ -96,11 +96,64 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var shipCheckbox = document.getElementById('shipDifferentCheckbox');
-        var shippingFields = document.getElementById('shippingFields');
-        if (!shipCheckbox || !shippingFields) return;
+        var shippingForm = document.getElementById('shippingForm');
+        var placeOrderBtn = document.getElementById('placeOrderBtn');
+        var billingForm = document.getElementById('billingForm');
 
-        shipCheckbox.addEventListener('change', function() {
-            shippingFields.style.display = shipCheckbox.checked ? '' : 'none';
-        });
+        if (shipCheckbox && shippingForm) {
+            shipCheckbox.addEventListener('change', function() {
+                shippingForm.style.display = shipCheckbox.checked ? '' : 'none';
+            });
+        }
+
+        if (placeOrderBtn) {
+            placeOrderBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Build one hidden form combining billing + (optional) shipping +
+                // payment method, then submit it normally to core/place_order.php.
+                // This keeps the original two <form class="row"> elements
+                // (and their CSS-driven styling) completely untouched.
+                var mergedForm = document.createElement('form');
+                mergedForm.method = 'POST';
+                mergedForm.action = 'core/place_order.php';
+                mergedForm.style.display = 'none';
+
+                function copyFields(sourceForm) {
+                    if (!sourceForm) return;
+                    var fields = sourceForm.querySelectorAll('input, textarea, select');
+                    fields.forEach(function(field) {
+                        if (!field.name) return;
+                        var hidden = document.createElement('input');
+                        hidden.type = 'hidden';
+                        hidden.name = field.name;
+                        hidden.value = field.value;
+                        mergedForm.appendChild(hidden);
+                    });
+                }
+
+                copyFields(billingForm);
+
+                if (shipCheckbox && shipCheckbox.checked) {
+                    var shipDifferentInput = document.createElement('input');
+                    shipDifferentInput.type = 'hidden';
+                    shipDifferentInput.name = 'ship_different';
+                    shipDifferentInput.value = '1';
+                    mergedForm.appendChild(shipDifferentInput);
+
+                    copyFields(shippingForm);
+                }
+
+                var selectedPayment = document.querySelector('input[name="payment_method"]:checked');
+                var paymentInput = document.createElement('input');
+                paymentInput.type = 'hidden';
+                paymentInput.name = 'payment_method';
+                paymentInput.value = selectedPayment ? selectedPayment.value : '';
+                mergedForm.appendChild(paymentInput);
+
+                document.body.appendChild(mergedForm);
+                mergedForm.submit();
+            });
+        }
     });
 </script>
