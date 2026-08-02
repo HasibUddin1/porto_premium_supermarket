@@ -70,8 +70,6 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                     </div>
 
 
-                    <!-- Cart Items -->
-
                     <?php
                     require_once __DIR__ . '/../core/db_connection.php'; // exposes $conn
                     require_once __DIR__ . '/../core/cart_helper.php';
@@ -115,12 +113,11 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                                 <?php endif; ?>
                             </ul>
 
-                            <?php if (!empty($cart['items'])): ?>
-                                <div class="cart_total clear_fix">
-                                    <span class="total font_fix float_left cart_total_text">Total - $<?php echo number_format($cart['total'], 2); ?></span>
-                                    <a href="cart.php" class="s_color_bg float_right tran3s">View Cart</a>
-                                </div>
-                            <?php endif; ?>
+                            <?php $cartTotalHidden = empty($cart['items']) ? ' style="display: none;"' : ''; ?>
+                            <div class="cart_total clear_fix" <?php echo $cartTotalHidden; ?>>
+                                <span class="total font_fix float_left cart_total_text">Total - $<?php echo number_format($cart['total'], 2); ?></span>
+                                <a href="cart.php" class="s_color_bg float_right tran3s">View Cart</a>
+                            </div>
                         </div> <!-- End of .cart_list -->
                     </div>
 

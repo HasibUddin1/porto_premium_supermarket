@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           updateCartCount(data.cart_count);
           updateCartTotal(data.cart_total);
+          hideCartTotalIfEmpty(data.cart_count);
 
           showToast(data.message || "Item removed.", false);
         } else {
@@ -164,6 +165,21 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".cart_total_text").forEach(function (el) {
       el.textContent = "Total - $" + total;
     });
+
+    // The "Total / View Cart" block is always in the DOM, just hidden
+    // via inline style when the cart is empty — reveal it here.
+    var totalBlock = document.querySelector(".cart_total");
+    if (totalBlock) {
+      totalBlock.style.display = "";
+    }
+  }
+
+  function hideCartTotalIfEmpty(count) {
+    if (count > 0) return;
+    var totalBlock = document.querySelector(".cart_total");
+    if (totalBlock) {
+      totalBlock.style.display = "none";
+    }
   }
 
   function showToast(message, isError) {

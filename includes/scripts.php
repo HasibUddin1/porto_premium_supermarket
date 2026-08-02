@@ -90,3 +90,17 @@
         });
     });
 </script>
+
+
+<!-- Checkout page js -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var shipCheckbox = document.getElementById('shipDifferentCheckbox');
+        var shippingFields = document.getElementById('shippingFields');
+        if (!shipCheckbox || !shippingFields) return;
+
+        shipCheckbox.addEventListener('change', function() {
+            shippingFields.style.display = shipCheckbox.checked ? '' : 'none';
+        });
+    });
+</script>

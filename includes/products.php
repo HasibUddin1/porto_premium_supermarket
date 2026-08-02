@@ -189,13 +189,6 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                                     </li>
 
 
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="fa fa-heart-o"></span>
-                                                        </a>
-                                                    </li>
-
-
                                                 </ul>
 
                                             </div>
