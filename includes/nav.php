@@ -55,13 +55,30 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                                 <!-- select menu -->
                                 <form action="#" class="select-form">
                                     <div class="g-input f1 mb-30">
+                                        <?php
+                                        // Place this in includes/nav.php in place of the existing static <select> block.
+                                        // Session is likely already started elsewhere in nav.php (e.g. via cart_helper.php),
+                                        // but this guards it in case this block is included on its own.
+                                        if (session_status() === PHP_SESSION_NONE) {
+                                            session_start();
+                                        }
+
+                                        $isLoggedIn = isset($_SESSION['user_id']);
+                                        ?>
+
                                         <select
                                             class="text-capitalize selectpicker"
                                             data-style="g-select"
                                             data-width="100%"
                                             onchange="if(this.value) window.location.href=this.value;">
-                                            <option value="">Sign In</option>
-                                            <option value="login">Sign In</option>
+                                            <?php if ($isLoggedIn): ?>
+                                                <option value="">My Account</option>
+                                                <option value="dashboard/index.php">Dashboard</option>
+                                                <option value="core/logout.php">Logout</option>
+                                            <?php else: ?>
+                                                <option value="">Sign In</option>
+                                                <option value="login">Sign In</option>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </form>
