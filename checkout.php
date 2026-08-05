@@ -209,7 +209,7 @@ function old_val($oldInput, $key, $default = '')
                                 <?php foreach ($cart['items'] as $item): ?>
                                     <tr>
                                         <td class="flex_item clear_fix">
-                                            <img width="70" src="<?php echo e_cart($item['image']); ?>" alt="images" class="float_left">
+                                            <img src="<?php echo e_cart($item['image']); ?>" alt="images" class="float_left">
                                             <h6 class="float_left"><?php echo e_cart($item['name']); ?></h6>
                                         </td>
                                         <td><input type="number" value="<?php echo (int) $item['quantity']; ?>" min="0" disabled></td>
@@ -252,8 +252,8 @@ function old_val($oldInput, $key, $default = '')
                             <span>Cheque Payment</span>
                         </div>
                         <div class="pay1">
-                            <input type="radio" name="payment_method" value="credit_card" <?php echo (($oldInput['payment_method'] ?? '') === 'credit_card') ? 'checked' : ''; ?>>
-                            <span>Credit Card</span>
+                            <input type="radio" name="payment_method" value="stripe" <?php echo (($oldInput['payment_method'] ?? '') === 'stripe') ? 'checked' : ''; ?>>
+                            <span>Pay with Card (Stripe)</span>
                             <img src="images/check-out/1.jpg" alt="image" class="float_right">
                         </div>
                         <div class="pay1">

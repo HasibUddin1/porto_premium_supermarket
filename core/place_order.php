@@ -61,7 +61,7 @@ if ($fields['email'] === '' || !filter_var($fields['email'], FILTER_VALIDATE_EMA
 }
 if ($fields['phone'] === '') $errors[] = 'Phone number is required.';
 
-$allowedPaymentMethods = ['bank_transfer', 'cheque', 'credit_card', 'paypal'];
+$allowedPaymentMethods = ['bank_transfer', 'cheque', 'stripe', 'paypal'];
 if (!in_array($fields['payment_method'], $allowedPaymentMethods, true)) {
     $errors[] = 'Please choose a payment method.';
 }
@@ -143,11 +143,16 @@ try {
     }
     $itemStmt->close();
 
-    // Clear the cart now that the order is placed
-    $clearStmt = $conn->prepare("DELETE FROM cart_items WHERE user_id = ?");
-    $clearStmt->bind_param('i', $userId);
-    $clearStmt->execute();
-    $clearStmt->close();
+    // Clear the cart now — UNLESS this is a Stripe order, where we wait
+    // until the payment actually succeeds (webhook / stripe_success.php)
+    // before clearing it, so an abandoned/failed Stripe checkout doesn't
+    // silently empty the customer's cart.
+    if ($fields['payment_method'] !== 'stripe') {
+        $clearStmt = $conn->prepare("DELETE FROM cart_items WHERE user_id = ?");
+        $clearStmt->bind_param('i', $userId);
+        $clearStmt->execute();
+        $clearStmt->close();
+    }
 
     $conn->commit();
 } catch (Throwable $e) {
@@ -156,6 +161,58 @@ try {
     $_SESSION['checkout_old']    = $fields;
     header('Location: ../checkout.php');
     exit;
+}
+
+// ---------- Stripe: create a Checkout Session and redirect to it ----------
+if ($fields['payment_method'] === 'stripe') {
+    require_once __DIR__ . '/../config/config.php';       // STRIPE_SECRET_KEY etc.
+    require_once __DIR__ . '/../vendor/autoload.php';     // composer autoload
+
+    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+
+    $lineItems = [];
+    foreach ($cart['items'] as $item) {
+        $lineItems[] = [
+            'price_data' => [
+                'currency'     => 'eur', // change if your store charges in a different currency
+                'product_data' => [
+                    'name' => $item['name'],
+                ],
+                'unit_amount' => (int) round($item['price'] * 100), // Stripe wants the smallest currency unit (cents)
+            ],
+            'quantity' => (int) $item['quantity'],
+        ];
+    }
+
+    // Figure out the site's base URL so success/cancel links work wherever this is hosted
+    $scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $baseUrl = $scheme . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME'], 1) . '/..';
+
+    try {
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items'           => $lineItems,
+            'mode'                 => 'payment',
+            'customer_email'       => $fields['email'],
+            'success_url'          => $baseUrl . '/core/stripe_success.php?order_id=' . $orderId . '&session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'           => $baseUrl . '/checkout.php',
+            'metadata'             => [
+                'order_id' => $orderId,
+            ],
+        ]);
+
+        $saveSessionStmt = $conn->prepare("UPDATE orders SET stripe_session_id = ? WHERE id = ?");
+        $saveSessionStmt->bind_param('si', $session->id, $orderId);
+        $saveSessionStmt->execute();
+        $saveSessionStmt->close();
+
+        header('Location: ' . $session->url);
+        exit;
+    } catch (\Exception $e) {
+        $_SESSION['checkout_errors'] = ['Could not start the Stripe checkout. Please try again.'];
+        header('Location: ../checkout.php');
+        exit;
+    }
 }
 
 header('Location: ../order_success.php?order_id=' . $orderId);
