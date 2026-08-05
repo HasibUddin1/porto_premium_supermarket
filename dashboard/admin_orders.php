@@ -20,71 +20,82 @@ function e_dash($v)
 {
     return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 }
+function tab_class($val, $current)
+{
+    return $val === $current ? 'active' : '';
+}
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <?php
-    $pageInfo = [
-        "title" => "Porto Premium Supermarket - Dashboard",
-    ];
-    ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders &amp; Payments - Dashboard</title>
 
-    <?php include_once __DIR__ . '/includes/head.php'; ?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<div class="container" style="margin: 40px auto;">
-    <div style="display: flex; gap: 30px;">
+<body>
+    <div class="dashboard-wrapper">
         <?php require __DIR__ . '/includes/sidebar.php'; ?>
 
-        <div style="flex: 1;">
-            <h2>Orders &amp; Payment History</h2>
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Orders &amp; Payment History</h1>
+            </div>
 
-            <div style="margin: 15px 0;">
-                <a href="admin_orders.php" style="margin-right: 12px; <?php echo $paymentFilter === '' ? 'font-weight: bold;' : ''; ?>">All</a>
-                <a href="admin_orders.php?payment_status=paid" style="margin-right: 12px; <?php echo $paymentFilter === 'paid' ? 'font-weight: bold;' : ''; ?>">Paid</a>
-                <a href="admin_orders.php?payment_status=unpaid" style="margin-right: 12px; <?php echo $paymentFilter === 'unpaid' ? 'font-weight: bold;' : ''; ?>">Unpaid</a>
-                <a href="admin_orders.php?payment_status=failed" style="<?php echo $paymentFilter === 'failed' ? 'font-weight: bold;' : ''; ?>">Failed</a>
+            <div class="filter-tabs">
+                <a href="admin_orders.php" class="<?php echo tab_class('', $paymentFilter); ?>">All</a>
+                <a href="admin_orders.php?payment_status=paid" class="<?php echo tab_class('paid', $paymentFilter); ?>">Paid</a>
+                <a href="admin_orders.php?payment_status=unpaid" class="<?php echo tab_class('unpaid', $paymentFilter); ?>">Unpaid</a>
+                <a href="admin_orders.php?payment_status=failed" class="<?php echo tab_class('failed', $paymentFilter); ?>">Failed</a>
             </div>
 
             <?php if ($adminSuccess): ?>
-                <div class="alert alert-success"><?php echo e_dash($adminSuccess); ?></div>
+                <div class="dash-alert dash-alert-success"><?php echo e_dash($adminSuccess); ?></div>
             <?php endif; ?>
 
-            <div class="table-responsive" style="margin-top: 10px;">
-                <table class="table table-1">
+            <div class="dash-table-wrap">
+                <table class="dash-table">
                     <tr>
-                        <th><span>Order #</span></th>
-                        <th><span>Customer</span></th>
-                        <th><span>Date</span></th>
-                        <th><span>Total</span></th>
-                        <th><span>Payment</span></th>
-                        <th><span>Status</span></th>
-                        <th><span>Delivery</span></th>
+                        <th>Order #</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Delivery</th>
                     </tr>
                     <?php foreach ($orders as $order): ?>
                         <tr>
                             <td>#<?php echo (int) $order['id']; ?></td>
                             <td>
                                 <?php echo e_dash($order['customer_name']); ?><br>
-                                <span style="font-size: 12px; color: #888;"><?php echo e_dash($order['email']); ?> &middot; <?php echo e_dash($order['phone']); ?></span>
+                                <span class="text-muted"><?php echo e_dash($order['email']); ?> &middot; <?php echo e_dash($order['phone']); ?></span>
                             </td>
                             <td><?php echo e_dash(date('d M Y', strtotime($order['created_at']))); ?></td>
                             <td>$<?php echo number_format((float) $order['total_amount'], 2); ?></td>
                             <td>
-                                <?php
-                                $paymentColor = ['paid' => '#4caf50', 'unpaid' => '#f0ad4e', 'failed' => '#e53935'][$order['payment_status']] ?? '#888';
-                                ?>
-                                <span style="color: <?php echo $paymentColor; ?>; font-weight: bold;"><?php echo e_dash(ucfirst($order['payment_status'])); ?></span>
-                                <br><span style="font-size: 12px; color: #888;"><?php echo e_dash(str_replace('_', ' ', ucfirst($order['payment_method']))); ?></span>
+                                <span class="badge badge-<?php echo e_dash($order['payment_status']); ?>"><?php echo e_dash(ucfirst($order['payment_status'])); ?></span>
+                                <br><span class="text-muted"><?php echo e_dash(str_replace('_', ' ', ucfirst($order['payment_method']))); ?></span>
                             </td>
                             <td><?php echo e_dash(ucfirst($order['status'])); ?></td>
                             <td>
                                 <?php if ($order['delivered_at']): ?>
-                                    <span style="color: #4caf50;">Delivered<br><?php echo e_dash(date('d M Y', strtotime($order['delivered_at']))); ?></span>
+                                    <span class="badge badge-delivered">Delivered</span><br>
+                                    <span class="text-muted"><?php echo e_dash(date('d M Y', strtotime($order['delivered_at']))); ?></span>
                                 <?php else: ?>
                                     <form action="../core/admin_order_delivered.php" method="post">
                                         <input type="hidden" name="order_id" value="<?php echo (int) $order['id']; ?>">
-                                        <button type="submit" class="tran3s color1_bg" style="padding: 4px 10px; font-size: 12px;">Mark Delivered</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Mark Delivered</button>
                                     </form>
                                 <?php endif; ?>
                             </td>
@@ -92,6 +103,8 @@ function e_dash($v)
                     <?php endforeach; ?>
                 </table>
             </div>
-        </div>
+        </main>
     </div>
-</div>
+</body>
+
+</html>

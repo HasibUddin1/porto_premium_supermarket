@@ -2,41 +2,31 @@
 $isAdmin = ($_SESSION['user_role'] ?? '') === 'admin';
 $currentPage = basename($_SERVER['SCRIPT_NAME']);
 
-function nav_active($page, $currentPage)
+function nav_active_class($page, $currentPage)
 {
-    return $page === $currentPage ? ' style="font-weight: bold;"' : '';
+    return $page === $currentPage ? ' class="active"' : '';
 }
 ?>
-<div class="dashboard_sidebar" style="min-width: 220px; padding: 20px; border-right: 1px solid #eee;">
-    <ul style="list-style: none; padding: 0; margin: 0;">
-        <li style="margin-bottom: 12px;">
-            <a href="index.php" <?php echo nav_active('index.php', $currentPage); ?>>Overview</a>
-        </li>
+<aside class="dashboard-sidebar">
+    <div class="brand">Porto Supermarket</div>
+    <ul>
+        <li><a href="index.php" <?php echo nav_active_class('index.php', $currentPage); ?>>Overview</a></li>
 
         <?php if ($isAdmin): ?>
-            <li style="margin-bottom: 12px;">
-                <a href="admin_users.php" <?php echo nav_active('admin_users.php', $currentPage); ?>>Manage Users</a>
-            </li>
-            <li style="margin-bottom: 12px;">
-                <a href="admin_products.php" <?php echo nav_active('admin_products.php', $currentPage); ?>>Manage Products</a>
-            </li>
-            <li style="margin-bottom: 12px;">
-                <a href="admin_categories.php" <?php echo nav_active('admin_categories.php', $currentPage); ?>>Categories</a>
-            </li>
-            <li style="margin-bottom: 12px;">
-                <a href="admin_orders.php" <?php echo nav_active('admin_orders.php', $currentPage); ?>>Orders &amp; Payments</a>
-            </li>
+            <li><a href="admin_users.php" <?php echo nav_active_class('admin_users.php', $currentPage); ?>>Manage Users</a></li>
+            <li><a href="admin_products.php" <?php echo nav_active_class('admin_products.php', $currentPage); ?>>Manage Products</a></li>
+            <li><a href="admin_product_form.php" <?php echo nav_active_class('admin_product_form.php', $currentPage); ?>>Add Product</a></li>
+            <li><a href="admin_categories.php" <?php echo nav_active_class('admin_categories.php', $currentPage); ?>>Categories</a></li>
+            <li><a href="admin_orders.php" <?php echo nav_active_class('admin_orders.php', $currentPage); ?>>Orders &amp; Payments</a></li>
         <?php else: ?>
-            <li style="margin-bottom: 12px;">
-                <a href="orders.php" <?php echo nav_active('orders.php', $currentPage); ?>>My Orders</a>
-            </li>
-            <li style="margin-bottom: 12px;">
-                <a href="profile.php" <?php echo nav_active('profile.php', $currentPage); ?>>My Account</a>
-            </li>
+            <li><a href="orders.php" <?php echo nav_active_class('orders.php', $currentPage); ?>>My Orders</a></li>
+            <li><a href="profile.php" <?php echo nav_active_class('profile.php', $currentPage); ?>>My Account</a></li>
         <?php endif; ?>
-
-        <li style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 12px;">
-            <a href="../core/logout.php">Logout</a>
-        </li>
     </ul>
-</div>
+
+    <div class="sidebar-section">
+        <ul>
+            <li><a href="../core/logout.php" class="logout-link">Logout</a></li>
+        </ul>
+    </div>
+</aside>

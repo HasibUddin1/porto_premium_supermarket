@@ -458,6 +458,62 @@ img {
   margin-bottom: 20px;
 }
 
+/* ---------- Tag chips (product tags input) ---------- */
+
+.tag-input-wrap {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  background: var(--white);
+}
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-chips:not(:empty) {
+  margin-bottom: 8px;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 5px 8px 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tag-chip-remove {
+  background: none;
+  border: none;
+  color: var(--primary-dark);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  opacity: 0.7;
+}
+
+.tag-chip-remove:hover {
+  opacity: 1;
+}
+
+.tag-input-wrap input[type="text"] {
+  border: none;
+  padding: 4px 2px;
+  width: 100%;
+}
+
+.tag-input-wrap input[type="text"]:focus {
+  outline: none;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {

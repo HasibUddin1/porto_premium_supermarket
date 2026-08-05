@@ -22,48 +22,64 @@ function e_dash($v)
     return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <?php
-    $pageInfo = [
-        "title" => "Porto Premium Supermarket - Dashboard",
-    ];
-    ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Porto Supermarket</title>
 
-    <?php include_once __DIR__ . '/includes/head.php'; ?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<div class="container" style="margin: 40px auto;">
-    <div style="display: flex; gap: 30px;">
+<body>
+    <div class="dashboard-wrapper">
         <?php require __DIR__ . '/includes/sidebar.php'; ?>
 
-        <div style="flex: 1;">
-            <h2>Welcome, <?php echo e_dash($currentUserName); ?></h2>
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome, <?php echo e_dash($currentUserName); ?></h1>
+                    <p class="dashboard-subtext"><?php echo $isAdmin ? 'Admin overview' : 'Your account overview'; ?></p>
+                </div>
+            </div>
 
             <?php if ($isAdmin): ?>
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-md-3 col-sm-6" style="padding: 15px; border: 1px solid #eee; margin: 0 10px 10px 0; display: inline-block;">
-                        <h4><?php echo (int) $userCount; ?></h4>
-                        <span>Total Users</span>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <p class="stat-value"><?php echo (int) $userCount; ?></p>
+                        <p class="stat-label">Total Users</p>
                     </div>
-                    <div class="col-md-3 col-sm-6" style="padding: 15px; border: 1px solid #eee; margin: 0 10px 10px 0; display: inline-block;">
-                        <h4><?php echo (int) $productCount; ?></h4>
-                        <span>Total Products</span>
+                    <div class="stat-card">
+                        <p class="stat-value"><?php echo (int) $productCount; ?></p>
+                        <p class="stat-label">Total Products</p>
                     </div>
-                    <div class="col-md-3 col-sm-6" style="padding: 15px; border: 1px solid #eee; margin: 0 10px 10px 0; display: inline-block;">
-                        <h4><?php echo (int) $orderCount; ?></h4>
-                        <span>Total Orders</span>
+                    <div class="stat-card">
+                        <p class="stat-value"><?php echo (int) $orderCount; ?></p>
+                        <p class="stat-label">Total Orders</p>
                     </div>
-                    <div class="col-md-3 col-sm-6" style="padding: 15px; border: 1px solid #eee; margin: 0 10px 10px 0; display: inline-block;">
-                        <h4>$<?php echo number_format((float) $revenue, 2); ?></h4>
-                        <span>Revenue (paid orders)</span>
+                    <div class="stat-card">
+                        <p class="stat-value">$<?php echo number_format((float) $revenue, 2); ?></p>
+                        <p class="stat-label">Revenue (paid orders)</p>
                     </div>
                 </div>
             <?php else: ?>
-                <p style="margin-top: 15px;">You've placed <strong><?php echo (int) $myOrderCount; ?></strong> order(s) so far.</p>
-                <p><a href="orders.php" class="tran3s color1_bg" style="display: inline-block; padding: 10px 20px;">View Order History</a></p>
-                <p><a href="profile.php" class="tran3s color1_bg" style="display: inline-block; padding: 10px 20px;">Update My Account</a></p>
+                <div class="action-card">
+                    <p>You've placed <strong><?php echo (int) $myOrderCount; ?></strong> order(s) so far.</p>
+                    <a href="orders.php" class="btn btn-primary">View Order History</a>
+                    <a href="profile.php" class="btn btn-primary">Update My Account</a>
+                </div>
             <?php endif; ?>
-        </div>
+        </main>
     </div>
-</div>
+</body>
+
+</html>

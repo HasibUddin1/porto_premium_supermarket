@@ -13,43 +13,52 @@ function e_dash($v)
     return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <?php
-    $pageInfo = [
-        "title" => "Porto Premium Supermarket - Dashboard",
-    ];
-    ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Dashboard</title>
 
-    <?php include_once __DIR__ . '/includes/head.php'; ?>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<div class="container" style="margin: 40px auto;">
-    <div style="display: flex; gap: 30px;">
+<body>
+    <div class="dashboard-wrapper">
         <?php require __DIR__ . '/includes/sidebar.php'; ?>
 
-        <div style="flex: 1;">
-            <h2>Manage Users</h2>
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h1>Manage Users</h1>
+            </div>
 
             <?php if (!empty($adminErrors)): ?>
-                <div class="alert alert-danger">
+                <div class="dash-alert dash-alert-danger">
                     <ul><?php foreach ($adminErrors as $err): ?><li><?php echo e_dash($err); ?></li><?php endforeach; ?></ul>
                 </div>
             <?php endif; ?>
             <?php if ($adminSuccess): ?>
-                <div class="alert alert-success"><?php echo e_dash($adminSuccess); ?></div>
+                <div class="dash-alert dash-alert-success"><?php echo e_dash($adminSuccess); ?></div>
             <?php endif; ?>
 
-            <div class="table-responsive" style="margin-top: 20px;">
-                <table class="table table-1">
+            <div class="dash-table-wrap">
+                <table class="dash-table">
                     <tr>
-                        <th><span>Name</span></th>
-                        <th><span>Email</span></th>
-                        <th><span>Phone</span></th>
-                        <th><span>Role</span></th>
-                        <th><span>Joined</span></th>
-                        <th><span>Actions</span></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Joined</th>
+                        <th>Actions</th>
                     </tr>
                     <?php foreach ($users as $user): ?>
                         <tr>
@@ -57,13 +66,13 @@ function e_dash($v)
                             <td><?php echo e_dash($user['email']); ?></td>
                             <td><?php echo e_dash($user['phone']); ?></td>
                             <td>
-                                <form action="../core/admin_update_role.php" method="post" style="display: inline-flex; gap: 6px;">
+                                <form action="../core/admin_update_role.php" method="post" class="inline-form">
                                     <input type="hidden" name="user_id" value="<?php echo (int) $user['id']; ?>">
                                     <select name="role">
                                         <option value="user" <?php echo $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
                                         <option value="admin" <?php echo $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
                                     </select>
-                                    <button type="submit" class="tran3s color1_bg" style="padding: 4px 12px;">Update</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                 </form>
                             </td>
                             <td><?php echo e_dash(date('d M Y', strtotime($user['created_at']))); ?></td>
@@ -71,16 +80,18 @@ function e_dash($v)
                                 <?php if ((int) $user['id'] !== $currentUserId): ?>
                                     <form action="../core/admin_delete_user.php" method="post" onsubmit="return confirm('Delete this user permanently?');">
                                         <input type="hidden" name="user_id" value="<?php echo (int) $user['id']; ?>">
-                                        <button type="submit" class="tran3s" style="padding: 4px 12px; background: #e53935; color: #fff; border: none;">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 <?php else: ?>
-                                    <span style="color: #999;">(you)</span>
+                                    <span class="text-muted">(you)</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
-        </div>
+        </main>
     </div>
-</div>
+</body>
+
+</html>
