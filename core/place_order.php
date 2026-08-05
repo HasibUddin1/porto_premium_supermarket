@@ -209,7 +209,7 @@ if ($fields['payment_method'] === 'stripe') {
         header('Location: ' . $session->url);
         exit;
     } catch (\Exception $e) {
-        $_SESSION['checkout_errors'] = ['Could not start the Stripe checkout. Please try again.'];
+        $_SESSION['checkout_errors'] = ['Could not start the Stripe checkout: ' . $e->getMessage()]; // TEMP: shows real error, revert after debugging
         header('Location: ../checkout.php');
         exit;
     }
