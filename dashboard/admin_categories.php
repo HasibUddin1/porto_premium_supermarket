@@ -16,6 +16,17 @@ function e_dash($v)
 }
 ?>
 
+
+<head>
+    <?php
+    $pageInfo = [
+        "title" => "Porto Premium Supermarket - Dashboard",
+    ];
+    ?>
+
+    <?php include_once __DIR__ . '/includes/head.php'; ?>
+</head>
+
 <div class="container" style="margin: 40px auto;">
     <div style="display: flex; gap: 30px;">
         <?php require __DIR__ . '/includes/sidebar.php'; ?>
