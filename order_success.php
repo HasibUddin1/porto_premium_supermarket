@@ -96,7 +96,7 @@ function e_order($value)
                                     <?php foreach ($items as $item): ?>
                                         <tr>
                                             <td class="flex_item clear_fix">
-                                                <img src="<?php echo e_order($item['image']); ?>" alt="images" class="float_left">
+                                                <img width="70" src="<?php echo e_order($item['image']); ?>" alt="images" class="float_left">
                                                 <h6 class="float_left"><?php echo e_order($item['name']); ?></h6>
                                             </td>
                                             <td><?php echo (int) $item['quantity']; ?></td>
@@ -110,7 +110,7 @@ function e_order($value)
                         <p style="margin-top: 15px;"><strong>Shipping to:</strong> <?php echo e_order($order['shipping_address']); ?></p>
                         <p><strong>Order Total:</strong> $<?php echo number_format($order['total_amount'], 2); ?></p>
 
-                        <a href="shop" class="tran3s color1_bg" style="display: inline-block; margin-top: 20px; padding: 10px 25px;">Continue Shopping</a>
+                        <a href="shop" class="tran3s thm-btn" style="display: inline-block; margin-top: 20px; padding: 10px 25px;">Continue Shopping</a>
                     </div>
                 </div>
             <?php endif; ?>

@@ -6647,3 +6647,25 @@ header .ui-state-default,
   color: #7fb401;
   transition: all 0.3s ease-in-out;
 }
+
+
+/* Order Success and Checkout page css */
+.check_out_form .thm-btn {
+  transition: none;
+  line-height: 20px;
+  border-width: 0px;
+  margin: 0px;
+  padding: 12px 45px;
+  letter-spacing: 0px;
+  font-weight: 700;
+  font-size: 14px;
+  background-color: #7fb401;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.check_out_form .thm-btn:hover {
+  background-color: lightgray;
+  color: #7fb401;
+  transition: all 0.3s ease-in-out;
+}

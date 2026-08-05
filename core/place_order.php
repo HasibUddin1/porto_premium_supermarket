@@ -185,8 +185,10 @@ if ($fields['payment_method'] === 'stripe') {
     }
 
     // Figure out the site's base URL so success/cancel links work wherever this is hosted
-    $scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-    $baseUrl = $scheme . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME'], 1) . '/..';
+    $scheme    = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $scriptDir = dirname($_SERVER['SCRIPT_NAME']); // e.g. /Porto Preimum Supermarket/core
+    $baseDir   = dirname($scriptDir);              // e.g. /Porto Preimum Supermarket
+    $baseUrl   = $scheme . '://' . $_SERVER['HTTP_HOST'] . str_replace(' ', '%20', $baseDir);
 
     try {
         $session = \Stripe\Checkout\Session::create([

@@ -100,8 +100,7 @@
                             <a href="tel:+351920526147"><i class="fa fa-phone"></i>+351 920 526 147</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-home"></i>No 271, Red Cross Building,
-                                Modern Street, Newyork City, USA.</a>
+                            <a href="#"><i class="fa fa-home"></i>Rua da firmeza 482, Porto, 4000-226 PORTO</a>
                         </li>
                     </ul>
 
