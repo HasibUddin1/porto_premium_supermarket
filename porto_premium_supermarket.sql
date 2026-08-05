@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2026 at 11:27 PM
+-- Generation Time: Aug 05, 2026 at 10:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -78,10 +78,28 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
   `status` enum('pending','processing','completed','cancelled') NOT NULL DEFAULT 'pending',
+  `delivered_at` timestamp NULL DEFAULT NULL,
   `shipping_address` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `customer_name` varchar(150) NOT NULL DEFAULT '',
+  `email` varchar(150) NOT NULL DEFAULT '',
+  `phone` varchar(20) NOT NULL DEFAULT '',
+  `billing_address` varchar(255) NOT NULL DEFAULT '',
+  `payment_method` varchar(50) NOT NULL DEFAULT '',
+  `payment_status` enum('unpaid','paid','failed') NOT NULL DEFAULT 'unpaid',
+  `stripe_session_id` varchar(255) DEFAULT NULL,
+  `stripe_payment_intent` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `total_amount`, `status`, `delivered_at`, `shipping_address`, `created_at`, `updated_at`, `customer_name`, `email`, `phone`, `billing_address`, `payment_method`, `payment_status`, `stripe_session_id`, `stripe_payment_intent`) VALUES
+(1, 1, 10.28, 'pending', NULL, '137/B Middle Paikpara, Porto, Portugal', '2026-08-05 06:30:35', '2026-08-05 06:30:35', 'Hasib Uddin', 'uhasib959@gmail.com', '01603412868', '137/B Middle Paikpara, Porto, Portugal', 'stripe', 'unpaid', NULL, NULL),
+(2, 1, 10.28, 'pending', NULL, '137/B Middle Paikpara, Porto, Portugal', '2026-08-05 06:36:59', '2026-08-05 06:36:59', 'Hasib Uddin', 'uhasib959@gmail.com', '01603412868', '137/B Middle Paikpara, Porto, Portugal', 'stripe', 'unpaid', NULL, NULL),
+(3, 1, 10.28, 'processing', NULL, '137/B Middle Paikpara, Porto, Portugal', '2026-08-05 06:38:38', '2026-08-05 06:40:01', 'Hasib Uddin', 'uhasib959@gmail.com', '01603412868', '137/B Middle Paikpara, Porto, Portugal', 'stripe', 'paid', 'cs_test_b1Pem8aOpGhCA8actv7pK0VjdfLC1MBX7Jt2YIYbVp5me6HcU32hQNhI5P', 'pi_3U0yUrE3L5rDi1MP1cNe9PWW');
 
 -- --------------------------------------------------------
 
@@ -96,6 +114,18 @@ CREATE TABLE `order_items` (
   `quantity` int(11) NOT NULL,
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+(1, 1, 9, 1, 4.29),
+(2, 1, 8, 1, 5.99),
+(3, 2, 9, 1, 4.29),
+(4, 2, 8, 1, 5.99),
+(5, 3, 9, 1, 4.29),
+(6, 3, 8, 1, 5.99);
 
 -- --------------------------------------------------------
 
@@ -177,6 +207,7 @@ CREATE TABLE `users` (
   `role` enum('user','admin') NOT NULL DEFAULT 'user',
   `phone` varchar(20) NOT NULL,
   `location` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -185,8 +216,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `phone`, `location`, `created_at`, `updated_at`) VALUES
-(1, 'Hasib Uddin', 'uhasib959@gmail.com', '123456', 'user', '01603412868', '137/B Middle Paikpara', '2026-07-31 19:05:29', '2026-07-31 19:05:29');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `phone`, `location`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Hasib Uddin', 'uhasib959@gmail.com', '123456', 'user', '01603412868', '137/B Middle Paikpara', NULL, '2026-07-31 19:05:29', '2026-07-31 19:05:29'),
+(2, 'Md Sohel', 'sabedoria.porto@gmail.com', '5xE^#8prhL!N8l8L', 'admin', '+351920526147', 'Porto Portugal', NULL, '2026-08-05 08:47:59', '2026-08-05 08:48:32');
 
 --
 -- Indexes for dumped tables
@@ -253,7 +285,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -265,13 +297,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -289,7 +321,7 @@ ALTER TABLE `product_reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
