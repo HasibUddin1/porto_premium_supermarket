@@ -1,3 +1,5 @@
+<!-- TODO: Implement contact form functionality -->
+
 <section class="single-contact_us">
     <div class="container">
         <div class="row">

@@ -2,45 +2,49 @@
 
 include_once __DIR__ . "/../core/db_connection.php";
 
+// ---------- Overall total (used for the "All Products" tab's View More) ----------
+$totalProducts = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS total FROM products"))['total'];
 
-// Random Categories for Featured Products Section
-$featuredCategories = mysqli_query($conn, "
-    SELECT id, name
-    FROM categories
+// ---------- Pick 4 random categories that actually have products ----------
+$featuredCategoriesResult = mysqli_query($conn, "
+    SELECT c.id, c.name, COUNT(p.id) AS total_count
+    FROM categories c
+    LEFT JOIN products p ON p.category_id = c.id
+    GROUP BY c.id
+    HAVING total_count > 0
     ORDER BY RAND()
     LIMIT 4
 ");
+$featuredCategories = mysqli_fetch_all($featuredCategoriesResult, MYSQLI_ASSOC);
 
+// ---------- For each of those categories, fetch up to 8 of its products ----------
+$displayProducts = [];
 
-// Products Fetch
-$productQuery = mysqli_query($conn, "
-SELECT
-    products.*,
-    categories.name AS category_name
-FROM products
-LEFT JOIN categories
-ON categories.id = products.category_id
-ORDER BY products.id DESC
-");
+foreach ($featuredCategories as $cat) {
+    $stmt = mysqli_prepare($conn, "
+        SELECT
+            products.*,
+            IFNULL(AVG(product_reviews.rating), 0) AS avg_rating
+        FROM products
+        LEFT JOIN product_reviews ON products.id = product_reviews.product_id
+        WHERE products.category_id = ?
+        GROUP BY products.id
+        ORDER BY products.id DESC
+        LIMIT 8
+    ");
+    mysqli_stmt_bind_param($stmt, 'i', $cat['id']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-// Product Ratings Fetch
-$productQuery = mysqli_query($conn, "
-SELECT
-    products.*,
-    categories.name AS category_name,
-    IFNULL(AVG(product_reviews.rating),0) AS avg_rating
-FROM products
+    while ($product = mysqli_fetch_assoc($result)) {
+        $displayProducts[] = $product;
+    }
+    mysqli_stmt_close($stmt);
+}
 
-LEFT JOIN categories
-ON categories.id = products.category_id
-
-LEFT JOIN product_reviews
-ON products.id = product_reviews.product_id
-
-GROUP BY products.id
-
-ORDER BY products.id DESC
-");
+// If everything currently in the DB is already shown above, there's nothing
+// more to see on the "All Products" tab, so don't offer a View More there.
+$showAllViewMore = $totalProducts > count($displayProducts);
 
 ?>
 
@@ -54,36 +58,44 @@ ORDER BY products.id DESC
         <!--Filter-->
         <div class="filters text-center">
             <ul class="filter-tabs filter-btns clearfix">
-                <li class="filter active" data-role="button" data-filter="all">
+                <li
+                    class="filter active"
+                    data-role="button"
+                    data-filter="all"
+                    data-shop-link="shop"
+                    data-show-more="<?php echo $showAllViewMore ? '1' : '0'; ?>">
                     <span class="txt">All Products</span>
                 </li>
-                <?php while ($category = mysqli_fetch_assoc($featuredCategories)): ?>
+                <?php foreach ($featuredCategories as $cat): ?>
 
                     <li
                         class="filter"
                         data-role="button"
-                        data-filter=".category-<?php echo $category['id']; ?>">
+                        data-filter=".category-<?php echo (int) $cat['id']; ?>"
+                        data-shop-link="shop?category=<?php echo (int) $cat['id']; ?>"
+                        data-show-more="<?php echo $cat['total_count'] > 8 ? '1' : '0'; ?>">
                         <span class="txt">
-                            <?php echo htmlspecialchars($category['name']); ?>
+                            <?php echo htmlspecialchars($cat['name']); ?>
                         </span>
                     </li>
 
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
 
         <div class="row filter-list clearfix" id="MixItUp717B05">
 
-            <?php while ($product = mysqli_fetch_assoc($productQuery)): ?>
+            <?php foreach ($displayProducts as $product): ?>
+
                 <!--Default Item-->
                 <div
-                    class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all category-<?php echo $product['category_id']; ?>"
+                    class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix mix_all default-item all category-<?php echo (int) $product['category_id']; ?>"
                     style="display: inline-block">
                     <div class="inner-box">
                         <div class="single-item center">
 
                             <figure class="image-box">
-                                <img src="products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <img height="184px" width="184px" src="products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
 
                                 <?php if (!empty($product['status'])): ?>
                                     <div class="product-model <?php echo strtolower($product['status']); ?>">
@@ -140,7 +152,7 @@ ORDER BY products.id DESC
                                                 </a>
                                             </li>
 
-                                            
+
                                         </ul>
                                     </div>
 
@@ -161,9 +173,37 @@ ORDER BY products.id DESC
                         </div>
                     </div>
                 </div>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
 
         </div>
+
+        <div class="text-center" id="featuredViewMoreWrap" style="margin-top: 30px; <?php echo $showAllViewMore ? '' : 'display: none;'; ?>">
+            <a href="shop" class="thm-btn btn-style-one" id="featuredViewMoreBtn">
+                View More
+            </a>
+        </div>
+
     </div>
 </section>
 <!-- End of section -->
+
+<script>
+    // Swap the "View More" button's target + visibility to match whichever
+    // filter tab is active, since each category can have more than the 8
+    // products shown here.
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabs = document.querySelectorAll('#featured_products .filter-tabs .filter');
+        var viewMoreWrap = document.getElementById('featuredViewMoreWrap');
+        var viewMoreBtn = document.getElementById('featuredViewMoreBtn');
+
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                var showMore = tab.getAttribute('data-show-more') === '1';
+                var shopLink = tab.getAttribute('data-shop-link');
+
+                viewMoreBtn.setAttribute('href', shopLink);
+                viewMoreWrap.style.display = showMore ? '' : 'none';
+            });
+        });
+    });
+</script>

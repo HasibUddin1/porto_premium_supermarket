@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var imgHolder = document.createElement("div");
       imgHolder.className = "img_holder float_left";
       var img = document.createElement("img");
-      img.src = item.image;
+      img.src = "products/" + item.image;
       img.width = 70;
       img.alt = "Cart Image";
       img.className = "img-responsive";

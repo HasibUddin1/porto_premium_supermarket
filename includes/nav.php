@@ -28,6 +28,8 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
         </div> <!-- End of .container -->
     </div> <!-- End of .top_header -->
 
+    <!-- TODO: Need to make search field work -->
+
     <div class="bottom_header">
         <div class="container">
             <div class="row align-items-center">

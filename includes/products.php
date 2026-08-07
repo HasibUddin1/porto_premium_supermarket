@@ -109,6 +109,8 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                     <figure class="image-box">
 
                                         <img
+                                            width="184px"
+                                            height="184px"
                                             src="products/<?php echo htmlspecialchars($product['image']); ?>"
                                             alt="<?php echo htmlspecialchars($product['name']); ?>">
 
