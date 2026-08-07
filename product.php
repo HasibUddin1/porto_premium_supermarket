@@ -412,10 +412,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                                     <div class="top-content">
                                                                         <ul>
                                                                             <li><a href="product.php?id=<?php echo (int) $rel['id']; ?>"><span class="fa fa-eye"></span></a></li>
-                                                                            <li class="tultip-op">
-                                                                                <span class="tultip"><i class="fa fa-sort-desc"></i>ADD TO CART</span>
-                                                                                <a href="cart_add.php?product_id=<?php echo (int) $rel['id']; ?>"><span class="icon-icon-32846"></span></a>
-                                                                            </li>
+                                                                            
                                                                             
                                                                         </ul>
                                                                     </div>

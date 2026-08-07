@@ -50,6 +50,7 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                     <div class="login_option float_left">
                         <div class="login_form">
                             <div class="user">
+                                <!-- TODO: need to add dynamic user image -->
                                 <i class="icon-photo"></i>
                             </div>
                             <div class="login-info">
