@@ -35,6 +35,27 @@ $categoryId = isset($_GET['category']) ? (int) $_GET['category'] : 0;
 
 /*
 |--------------------------------------------------------------------------
+| Pagination
+|--------------------------------------------------------------------------
+*/
+
+$perPage = 9;
+$page    = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
+
+$whereSql = " WHERE products.price BETWEEN $minPrice AND $maxPrice ";
+if ($categoryId > 0) {
+    $whereSql .= " AND products.category_id = $categoryId ";
+}
+
+$countSql = "SELECT COUNT(*) AS total FROM products $whereSql";
+$totalProducts = mysqli_fetch_assoc(mysqli_query($conn, $countSql))['total'];
+$totalPages    = max(1, (int) ceil($totalProducts / $perPage));
+$page          = min($page, $totalPages);
+$offset        = ($page - 1) * $perPage;
+
+
+/*
+|--------------------------------------------------------------------------
 | Products
 |--------------------------------------------------------------------------
 */
@@ -46,14 +67,10 @@ categories.name AS category_name
 FROM products
 LEFT JOIN categories
 ON products.category_id = categories.id
-WHERE products.price BETWEEN $minPrice AND $maxPrice
+$whereSql
+ORDER BY products.id DESC
+LIMIT $perPage OFFSET $offset
 ";
-
-if ($categoryId > 0) {
-    $sql .= " AND products.category_id = $categoryId ";
-}
-
-$sql .= " ORDER BY products.id DESC ";
 
 $result = mysqli_query($conn, $sql);
 
@@ -77,6 +94,20 @@ ORDER BY categories.name ASC
 ";
 
 $categoryResult = mysqli_query($conn, $categoryQuery);
+
+// Builds a pagination link that preserves category + price filters, only changing page
+function build_shop_page_link($pageNum, $categoryId, $minPrice, $maxPrice, $dbMinPrice, $dbMaxPrice)
+{
+    $params = ['page' => $pageNum];
+    if ($categoryId > 0) {
+        $params['category'] = $categoryId;
+    }
+    if ($minPrice != $dbMinPrice || $maxPrice != $dbMaxPrice) {
+        $params['min_price'] = $minPrice;
+        $params['max_price'] = $maxPrice;
+    }
+    return 'shop?' . http_build_query($params);
+}
 
 ?>
 
@@ -230,6 +261,32 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                     <?php endwhile; ?>
 
                 </div>
+
+                <?php if ($totalPages > 1): ?>
+                    <div class="pagination_area" style="margin-top: 25px; text-align: center;">
+                        <ul style="list-style: none; display: inline-flex; gap: 6px; padding: 0;">
+                            <?php if ($page > 1): ?>
+                                <li><a href="<?php echo build_shop_page_link($page - 1, $categoryId, $minPrice, $maxPrice, $dbMinPrice, $dbMaxPrice); ?>" class="tran3s" style="display: inline-block; padding: 8px 14px; border: 1px solid #eee;">&laquo; Prev</a></li>
+                            <?php endif; ?>
+
+                            <?php for ($p = 1; $p <= $totalPages; $p++): ?>
+                                <li>
+                                    <a
+                                        href="<?php echo build_shop_page_link($p, $categoryId, $minPrice, $maxPrice, $dbMinPrice, $dbMaxPrice); ?>"
+                                        class="tran3s <?php echo $p === $page ? 'color1_bg' : ''; ?>"
+                                        style="display: inline-block; padding: 8px 14px; border: 1px solid #eee; <?php echo $p === $page ? 'color: #fff;' : ''; ?>">
+                                        <?php echo $p; ?>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
+
+                            <?php if ($page < $totalPages): ?>
+                                <li><a href="<?php echo build_shop_page_link($page + 1, $categoryId, $minPrice, $maxPrice, $dbMinPrice, $dbMaxPrice); ?>" class="tran3s" style="display: inline-block; padding: 8px 14px; border: 1px solid #eee;">Next &raquo;</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
             </div>
 
             <!-- _______________________ SIDEBAR ____________________ -->
