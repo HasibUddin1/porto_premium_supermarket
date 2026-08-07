@@ -115,7 +115,7 @@ function e_cart_page($value)
                                         <tr>
                                             <td class="flex_item clear_fix">
                                                 <img
-                                                    src="<?php echo e_cart_page($item['image']); ?>"
+                                                    src="products/<?php echo e_cart_page($item['image']); ?>"
                                                     width="70"
                                                     alt="images"
                                                     class="float_left" />

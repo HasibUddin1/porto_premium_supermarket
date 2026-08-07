@@ -236,7 +236,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <?php foreach ($popularProducts as $i => $pop): ?>
                                     <div class="best_selling_item clear_fix<?php echo $i < count($popularProducts) - 1 ? ' border' : ''; ?>">
                                         <div class="img_holder float_left">
-                                            <img width="70" src="<?php echo e($pop['image']); ?>" alt="<?php echo e($pop['name']); ?>">
+                                            <img width="70" src="products/<?php echo e($pop['image']); ?>" alt="<?php echo e($pop['name']); ?>">
                                         </div> <!-- End of .img_holder -->
 
                                         <div class="text float_left">
@@ -391,7 +391,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                                     <div class="inner-box">
                                                         <div class="single-item center">
                                                             <figure class="image-box">
-                                                                <img src="<?php echo e($rel['image']); ?>" alt="<?php echo e($rel['name']); ?>">
+                                                                <img src="products/<?php echo e($rel['image']); ?>" alt="<?php echo e($rel['name']); ?>">
                                                                 <?php if ($rel['status'] === 'New'): ?>
                                                                     <div class="product-model new">New</div>
                                                                 <?php elseif ($rel['status'] === 'Hot'): ?>

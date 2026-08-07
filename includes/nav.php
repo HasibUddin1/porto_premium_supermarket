@@ -115,7 +115,7 @@ $curPageName = basename($_SERVER["SCRIPT_NAME"]);
                                         <li data-product-id="<?php echo (int) $item['id']; ?>">
                                             <div class="cart_item_wrapper clear_fix">
                                                 <div class="img_holder float_left">
-                                                    <img width="70" src="<?php echo e_cart($item['image']); ?>" alt="Cart Image" class="img-responsive">
+                                                    <img width="70" src="products/<?php echo e_cart($item['image']); ?>" alt="Cart Image" class="img-responsive">
                                                 </div> <!-- End of .img_holder -->
 
                                                 <div class="item_deatils float_left">
