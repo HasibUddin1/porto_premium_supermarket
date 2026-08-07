@@ -273,7 +273,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <div class="wrapper">
                             <div class="product_top_section clear_fix">
                                 <div class="img_holder float_left">
-                                    <img width="100" src="<?php echo e($product['image']); ?>" alt="<?php echo e($product['name']); ?>" class="img-responsive">
+                                    <img width="100" src="products/<?php echo e($product['image']); ?>" alt="<?php echo e($product['name']); ?>" class="img-responsive">
                                 </div> <!-- End of .img_holder -->
                                 <div class="item_description float_left">
                                     <h4><?php echo e($product['name']); ?></h4>

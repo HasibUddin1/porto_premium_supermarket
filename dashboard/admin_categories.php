@@ -14,6 +14,19 @@ $categoryErrors  = $_SESSION['category_errors'] ?? [];
 $categorySuccess = $_SESSION['category_success'] ?? '';
 unset($_SESSION['category_errors'], $_SESSION['category_success']);
 
+// ---------- Edit mode ----------
+$editId       = isset($_GET['edit']) ? (int) $_GET['edit'] : 0;
+$editCategory = null;
+if ($editId > 0) {
+    foreach ($categories as $cat) {
+        if ((int) $cat['id'] === $editId) {
+            $editCategory = $cat;
+            break;
+        }
+    }
+}
+$isEdit = $editCategory !== null;
+
 function e_dash($v)
 {
     return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
@@ -57,18 +70,29 @@ function e_dash($v)
             <?php endif; ?>
 
             <div class="action-card" style="max-width: 480px;">
-                <h3 style="margin-top: 0;">Add New Category</h3>
+                <h3 style="margin-top: 0;"><?php echo $isEdit ? 'Edit Category' : 'Add New Category'; ?></h3>
+
+                <?php if ($isEdit): ?>
+                    <img src="../categories/<?php echo e_dash($editCategory['image']); ?>" alt="<?php echo e_dash($editCategory['name']); ?>" class="dash-thumb" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                <?php endif; ?>
+
                 <form action="../core/admin_category_save.php" method="post" enctype="multipart/form-data" class="dash-form">
+                    <input type="hidden" name="category_id" value="<?php echo $isEdit ? (int) $editCategory['id'] : 0; ?>">
+
                     <div class="form_group">
                         <label>Category Name *</label>
-                        <input type="text" name="name" required>
+                        <input type="text" name="name" value="<?php echo $isEdit ? e_dash($editCategory['name']) : ''; ?>" required>
                     </div>
                     <div class="form_group">
-                        <label>Category Image *</label>
-                        <input type="file" name="category_image" accept="image/jpeg,image/png,image/gif,image/webp" required>
+                        <label>Category Image <?php echo $isEdit ? '(leave empty to keep current image)' : '*'; ?></label>
+                        <input type="file" name="category_image" accept="image/jpeg,image/png,image/gif,image/webp" <?php echo $isEdit ? '' : 'required'; ?>>
                         <p class="helper-text">Please use a <strong>1:1 (square)</strong> image — for example <strong>1000&times;1000px</strong>.</p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Category</button>
+
+                    <button type="submit" class="btn btn-primary"><?php echo $isEdit ? 'Update Category' : 'Add Category'; ?></button>
+                    <?php if ($isEdit): ?>
+                        <a href="admin_categories.php" class="btn-link-danger" style="margin-left: 10px;">Cancel</a>
+                    <?php endif; ?>
                 </form>
             </div>
 
@@ -86,9 +110,11 @@ function e_dash($v)
                             <td><?php echo e_dash($cat['name']); ?></td>
                             <td><?php echo (int) $cat['product_count']; ?></td>
                             <td>
+                                <a href="admin_categories.php?edit=<?php echo (int) $cat['id']; ?>">Edit</a>
+                                &nbsp;|&nbsp;
                                 <a href="admin_products.php?category=<?php echo (int) $cat['id']; ?>">View Products</a>
                                 &nbsp;|&nbsp;
-                                <form action="../core/admin_category_delete.php" method="post" class="js-confirm-delete" data-message="Delete this category? This can't be undone.">
+                                <form action="../core/admin_category_delete.php" method="post" class="js-confirm-delete" data-message="Delete this category? This can't be undone." style="display: inline;">
                                     <input type="hidden" name="category_id" value="<?php echo (int) $cat['id']; ?>">
                                     <button type="submit" class="btn-link-danger">Delete</button>
                                 </form>

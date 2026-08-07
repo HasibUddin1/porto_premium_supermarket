@@ -109,7 +109,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
                                     <figure class="image-box">
 
                                         <img
-                                            src="<?php echo htmlspecialchars($product['image']); ?>"
+                                            src="products/<?php echo htmlspecialchars($product['image']); ?>"
                                             alt="<?php echo htmlspecialchars($product['name']); ?>">
 
                                         <?php if ($product['status'] == "New"): ?>
@@ -205,7 +205,7 @@ $categoryResult = mysqli_query($conn, $categoryQuery);
 
 
                                                 <p>
-                                                    <?php echo htmlspecialchars($product['description']); ?>
+                                                    <?php echo htmlspecialchars(substr($product['description'], 0, 80)); ?>...
                                                 </p>
 
 

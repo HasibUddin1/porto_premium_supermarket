@@ -132,7 +132,7 @@ function e_dash($v)
                     </div>
 
                     <div class="form_group">
-                        <label>Price ($) *</label>
+                        <label>Price (€) *</label>
                         <input type="number" step="0.01" min="0" name="price" value="<?php echo e_dash($product['price']); ?>" required>
                     </div>
 

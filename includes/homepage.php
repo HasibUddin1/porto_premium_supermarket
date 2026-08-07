@@ -487,14 +487,14 @@ $extraCategories   = array_slice($categories, 6);
                     <div class="inner-box">
                         <div class="single-item center">
                             <figure class="image-box">
-                                <img src="<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
+                                <img src="categories/<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
                             </figure>
                             <div class="overlay-box">
                                 <div class="inner">
                                     <div class="image-view">
                                         <div class="icon-holder">
                                             <a
-                                                href="<?php echo htmlspecialchars($category['image']); ?>"
+                                                href="categories/<?php echo htmlspecialchars($category['image']); ?>"
                                                 class="fancybox"
                                                 data-fancybox-group="home-gallery"
                                                 title="<?php echo htmlspecialchars($category['name']); ?>"><span class="icon-magnifier"></span></a>
@@ -527,14 +527,14 @@ $extraCategories   = array_slice($categories, 6);
                         <div class="inner-box">
                             <div class="single-item center">
                                 <figure class="image-box">
-                                    <img src="<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
+                                    <img src="categories/<?php echo htmlspecialchars($category['image']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
                                 </figure>
                                 <div class="overlay-box">
                                     <div class="inner">
                                         <div class="image-view">
                                             <div class="icon-holder">
                                                 <a
-                                                    href="<?php echo htmlspecialchars($category['image']); ?>"
+                                                    href="categories/<?php echo htmlspecialchars($category['image']); ?>"
                                                     class="fancybox"
                                                     data-fancybox-group="home-gallery"
                                                     title="<?php echo htmlspecialchars($category['name']); ?>"><span class="icon-magnifier"></span></a>
@@ -702,6 +702,8 @@ $extraCategories   = array_slice($categories, 6);
     </div>
 </section>
 
+
+<!-- TODO: ei section ta requirements hishebe update korte hobe -->
 <!-- Our Service ****************************** -->
 <div class="our_farmer">
     <div class="container">

@@ -83,7 +83,7 @@ ORDER BY products.id DESC
                         <div class="single-item center">
 
                             <figure class="image-box">
-                                <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <img src="products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
 
                                 <?php if (!empty($product['status'])): ?>
                                     <div class="product-model <?php echo strtolower($product['status']); ?>">
