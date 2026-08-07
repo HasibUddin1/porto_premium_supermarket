@@ -31,6 +31,7 @@ function e_dash($v)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png" />
     <title>Manage Products - Dashboard</title>
 
     <meta charset="utf-8">
@@ -78,7 +79,7 @@ function e_dash($v)
                     </tr>
                     <?php foreach ($products as $product): ?>
                         <tr>
-                            <td><img src="../<?php echo e_dash($product['image']); ?>" alt="<?php echo e_dash($product['name']); ?>" class="dash-thumb"></td>
+                            <td><img src="../products/<?php echo e_dash($product['image']); ?>" alt="<?php echo e_dash($product['name']); ?>" class="dash-thumb"></td>
                             <td><?php echo e_dash($product['name']); ?></td>
                             <td><?php echo e_dash($product['category_name'] ?? '—'); ?></td>
                             <td>$<?php echo number_format((float) $product['price'], 2); ?></td>
@@ -86,7 +87,7 @@ function e_dash($v)
                             <td>
                                 <a href="admin_product_form.php?id=<?php echo (int) $product['id']; ?>">Edit</a>
                                 &nbsp;|&nbsp;
-                                <form action="../core/admin_product_delete.php" method="post" style="display: inline;" onsubmit="return confirm('Delete this product?');">
+                                <form action="../core/admin_product_delete.php" method="post" style="display: inline;" class="js-confirm-delete" data-message="Delete this product? This can't be undone.">
                                     <input type="hidden" name="product_id" value="<?php echo (int) $product['id']; ?>">
                                     <button type="submit" class="btn-link-danger">Delete</button>
                                 </form>
@@ -97,6 +98,8 @@ function e_dash($v)
             </div>
         </main>
     </div>
+
+    <?php require __DIR__ . '/includes/confirm_modal.php'; ?>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png" />
 <title><?= isset($pageInfo['title']) ? $pageInfo['title'] . " - " . SITE_NAME : SITE_NAME ?></title>
 
 <meta charset="utf-8">

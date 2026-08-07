@@ -514,6 +514,98 @@ img {
   outline: none;
 }
 
+/* ---------- Confirm modal ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 15, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 30px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  animation: modal-pop 0.18s ease;
+}
+
+@keyframes modal-pop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-box .modal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fdeceb;
+  color: var(--danger);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.modal-box h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: var(--text-dark);
+}
+
+.modal-box p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.modal-actions .btn,
+.modal-actions button {
+  flex: 1;
+}
+
+.modal-cancel-btn {
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  background: var(--white);
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-cancel-btn:hover {
+  background: var(--bg-light);
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {

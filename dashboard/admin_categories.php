@@ -25,6 +25,7 @@ function e_dash($v)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png" />
     <title>Categories - Dashboard</title>
 
     <meta charset="utf-8">
@@ -81,16 +82,25 @@ function e_dash($v)
                     </tr>
                     <?php foreach ($categories as $cat): ?>
                         <tr>
-                            <td><img src="../<?php echo e_dash($cat['image']); ?>" alt="<?php echo e_dash($cat['name']); ?>" class="dash-thumb"></td>
+                            <td><img src="../categories/<?php echo e_dash($cat['image']); ?>" alt="<?php echo e_dash($cat['name']); ?>" class="dash-thumb"></td>
                             <td><?php echo e_dash($cat['name']); ?></td>
                             <td><?php echo (int) $cat['product_count']; ?></td>
-                            <td><a href="admin_products.php?category=<?php echo (int) $cat['id']; ?>">View Products</a></td>
+                            <td>
+                                <a href="admin_products.php?category=<?php echo (int) $cat['id']; ?>">View Products</a>
+                                &nbsp;|&nbsp;
+                                <form action="../core/admin_category_delete.php" method="post" class="js-confirm-delete" data-message="Delete this category? This can't be undone.">
+                                    <input type="hidden" name="category_id" value="<?php echo (int) $cat['id']; ?>">
+                                    <button type="submit" class="btn-link-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
         </main>
     </div>
+
+    <?php require __DIR__ . '/includes/confirm_modal.php'; ?>
 </body>
 
 </html>

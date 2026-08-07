@@ -19,6 +19,7 @@ function e_dash($v)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png" />
     <title>Manage Users - Dashboard</title>
 
 
@@ -78,7 +79,7 @@ function e_dash($v)
                             <td><?php echo e_dash(date('d M Y', strtotime($user['created_at']))); ?></td>
                             <td>
                                 <?php if ((int) $user['id'] !== $currentUserId): ?>
-                                    <form action="../core/admin_delete_user.php" method="post" onsubmit="return confirm('Delete this user permanently?');">
+                                    <form action="../core/admin_delete_user.php" method="post" class="js-confirm-delete" data-message="Delete this user permanently? This can't be undone.">
                                         <input type="hidden" name="user_id" value="<?php echo (int) $user['id']; ?>">
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
@@ -92,6 +93,8 @@ function e_dash($v)
             </div>
         </main>
     </div>
+
+    <?php require __DIR__ . '/includes/confirm_modal.php'; ?>
 </body>
 
 </html>
